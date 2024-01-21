@@ -1,13 +1,17 @@
-import CategoryCollection from "./components/category-collection/category-collection-component";
+import {Routes, Route } from "react-router-dom";
 
+import NavBar from "./routes/navigation/navbar-component";
+import Home from "./routes/home/home-component";
 
 const App = () => {
 
 
   return (
-    <main className="main__container">
-      <CategoryCollection />
-    </main>
+    <Routes>
+      <Route path="/" element={<NavBar/>}>
+        <Route index element={<Home/>}/>
+      </Route>
+    </Routes>
   );
 };
 
