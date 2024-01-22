@@ -17,9 +17,10 @@ const NavBar = () => {
             </div>
 
             <ul className="nav__menu-links">
-                <li className="nav__menu-link"> <Link to={"/"}>Home</Link> </li>
-                <li className="nav__menu-link"> <Link to={"/shop"}>Shop</Link> </li>
-                <li className="nav__menu-link"> <Link to={"/contact"}>Contact Us</Link> </li>
+                <li className="nav__menu-link"> <Link to={"/"}>HOME</Link> </li>
+                <li className="nav__menu-link"> <Link to={"/shop"}>SHOP</Link> </li>
+                <li className="nav__menu-link"> <Link to={"/contact"}>CONTACT US</Link> </li>
+                <li className="nav__menu-link"> <Link to={"/sign-in"}>SIGN IN</Link> </li>
             </ul>
         </nav>
         <Outlet/>

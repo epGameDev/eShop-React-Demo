@@ -28,12 +28,12 @@
     .nav__menu-link {
       padding: 10px 15px;
       cursor: pointer;
-      transition: transform 2ms ease-in-out;
+      transition: all 5ms ease-in;
 
     }
 
     .nav__menu-link:hover{
-        transform : scale(1.1);
+        transform : scale(1.2);
     }
 
   }
