@@ -18,6 +18,17 @@ body {
   min-width: 320px;
   max-width: 1400px;
   min-height: 100vh;
+  box-sizing: border-box;
+}
+
+
+a {
+  color: #5a5a5a;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #111;
 }
 
 

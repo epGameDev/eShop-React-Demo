@@ -1,0 +1,40 @@
+.main__nav-bar {
+  height: 5rem;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin: 1.7rem 0;
+
+  .nav__logo-container {
+    height: 100%;
+    width: 5rem;
+    padding-left: 1.7rem;
+
+    img {
+        width: 110%;
+        height: 100%;
+    }
+  }
+
+  .nav__menu-links {
+    margin: 0;
+    width: 50%;
+    height: 100%;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    list-style: none;
+
+    .nav__menu-link {
+      padding: 10px 15px;
+      cursor: pointer;
+      transition: transform 2ms ease-in-out;
+
+    }
+
+    .nav__menu-link:hover{
+        transform : scale(1.1);
+    }
+
+  }
+}

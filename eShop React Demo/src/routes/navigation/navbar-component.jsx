@@ -1,6 +1,9 @@
 import { Fragment } from "react";
 import { Outlet, Link } from "react-router-dom";
 
+import "./navbar-styles.scss";
+import logo from "../../assets/crown.svg"
+
 
 const NavBar = () => {
 
@@ -8,7 +11,9 @@ const NavBar = () => {
       <Fragment>
         <nav className="main__nav-bar">
             <div className="nav__logo-container">
-                <Link className="nav__logo" to={"/"}>LOGO</Link>
+                <Link className="nav__logo" to={"/"}>
+                    <img src={logo} alt="logo of a crown" />
+                </Link>
             </div>
 
             <ul className="nav__menu-links">
