@@ -1,4 +1,9 @@
+
+
+import "./contact-styles.scss"
+
 const Contact = () => {
+
     return(
         <main className="main__container">
             <h1>Contact Us</h1>

@@ -33,7 +33,9 @@
     }
 
     .nav__menu-link:hover{
-        transform : scale(1.2);
+      transform : scale(1.15);
+      text-decoration: underline;
+      text-underline-offset: 4px;
     }
 
   }
