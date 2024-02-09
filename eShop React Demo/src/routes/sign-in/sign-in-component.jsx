@@ -30,8 +30,9 @@ const SignIn = () => {
         <main className="main__container">
             <h1>Sign In Page</h1>
             <button className="google-btn" onClick={logGoogleUser}>Sign In With Google</button>
-            <SignUpForm />
             {/* <button className="google-btn" onClick={googleSignInRedirect}>Sign In With Google Redirect</button> */}
+            <hr/>
+            <SignUpForm />
         </main>
     )
 }

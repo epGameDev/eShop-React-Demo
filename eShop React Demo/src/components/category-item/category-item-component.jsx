@@ -7,12 +7,12 @@ const CategoryItem = ( {category} ) => {
 
     return (
         <div className="main__category-container">
-        <div className="category__background-img" style={ { backgroundImage: `url(${imageUrl})` } } />
-        <div className="category__body-container">
-            <h3>{title}</h3>
-            <p>Shop Now</p>
+            <div className="category__background-img" style={ { backgroundImage: `url(${imageUrl})` } } />
+            <div className="category__body-container">
+                <h3>{title}</h3>
+                <p>Shop Now</p>
+            </div>
         </div>
-    </div>
     )
 }
 
