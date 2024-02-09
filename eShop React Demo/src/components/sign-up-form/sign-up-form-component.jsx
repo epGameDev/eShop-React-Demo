@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from 'react-router-dom';
-import { createAuthUser_EmailAndPassword } from "../../utils/firebase/firebase-utils";
+import { createAuthUser_EmailAndPassword, createUserDocumentFromAuth } from "../../utils/firebase/firebase-utils";
 
 import "./sign-up-form-styles.scss";
 import "../../index.scss"
@@ -14,23 +14,50 @@ const defaultFormFields = {
 
 
 const SignUpForm = () => {
+  const navigateTo = useNavigate();
+
   const [formFields, setFromFields] = useState(defaultFormFields);
   const { displayName, email, password, confirmPassword } = formFields;
-  const navigateTo = useNavigate();
+
+  const resetFormFields = () => {
+    return setFromFields(defaultFormFields);
+  }
 
   const handleChange = (event) => {
     const { name, value } = event.target;
     setFromFields({...formFields, [name]: value });
   };
 
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    if(password !== confirmPassword) {
+      return alert("Passwords don't match!");
+    }
+
+    try {
+      const { user } = await createAuthUser_EmailAndPassword(email, password);
+      await createUserDocumentFromAuth(user, { displayName });
+      resetFormFields();
+
+    } catch (error) {
+      if (error.code === "auth/email-already-in-use") {
+        return alert("Email already in use");
+      }
+      console.log(`Error in creating user: ${error}`);
+
+    }
+
+    navigateTo('/');
+  }
+
+
   return (
     <div className="form__login-container">
       <h2>Sign In</h2>
 
-      <form method="POST" onSubmit={() => {
-        navigateTo('/');
-        return createAuthUser_EmailAndPassword(email, password);
-      }}>
+      <form method="POST" onSubmit={handleSubmit}>
         <div>
           <label htmlFor="display-name">Display Name</label>
           <input
