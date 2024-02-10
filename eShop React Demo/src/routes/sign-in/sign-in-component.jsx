@@ -4,6 +4,7 @@ import { googlePopUpSignIn, createUserDocumentFromAuth } from "../../utils/fireb
 
 
 import "./sign-in-styles.scss";
+import Button from "../../components/button/button-component";
 
 const SignIn = () => {
     const navigateTo = useNavigate();
@@ -18,7 +19,7 @@ const SignIn = () => {
     return(
         <main className="main__container">
             <h1>Sign In Page</h1>
-            <button className="google-btn" onClick={logGoogleUser}>Sign In With Google</button>
+            <Button buttonType={"google"} onClick={logGoogleUser} text={"Sign In With Google"} />
 
             <hr/>
             <SignUpForm />

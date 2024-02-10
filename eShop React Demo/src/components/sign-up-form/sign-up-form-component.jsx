@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import { createAuthUser_EmailAndPassword, createUserDocumentFromAuth } from "../../utils/firebase/firebase-utils";
+import Button from "../button/button-component";
 
 import "./sign-up-form-styles.scss";
 import "../../index.scss"
@@ -122,9 +123,7 @@ const SignUpForm = () => {
           <label htmlFor="re-password">Confirm Password</label>
         </div>
 
-        <div>
-          <button type="submit">Sign Up</button>
-        </div>
+        <Button buttonType={"secondary"} type={"submit"} text={"Sign Up"}/>
       </form>
     </div>
   );

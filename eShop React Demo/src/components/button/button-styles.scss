@@ -1,0 +1,61 @@
+.btn__container {
+
+    button{
+
+        border-radius: 5px;
+        padding: 0.6em 1.2em;
+        font-size: 1em;
+        font-weight: 500;
+        font-family: inherit;
+        cursor: pointer;
+        transition: border-color 0.25s;
+    }
+
+    button:focus,
+    button:focus-visible {
+        outline: 4px auto -webkit-focus-ring-color;
+    }
+
+    .btn__google {
+        color: #fff;
+        background-color: #4285f4;
+        border: 1px solid #444444ab;
+    }
+    
+    .btn__google:hover {
+        background-color: #0b67fc;
+        border: 1px solid #cecece;
+        box-shadow: inset 0px 4px 9px 6px #004ac259;
+    }
+    
+    .btn__primary{
+        background-color: #1a1a1a;
+        color: #eee;
+        border: 1px solid #eee;
+    }
+
+    .btn__primary:hover,
+    .btn__primary:focus {
+        background-color: #fff;
+        color: #1a1a1a;
+        border: 1px solid #000;
+        box-shadow: inset 0px -4px 4px 2px #3c3c3c0f;
+    }
+    
+    
+    .btn__secondary{
+        background-color: #fff;
+        color: #1a1a1a;
+        border: 1px solid #000000;
+    }
+    
+    .btn__secondary:hover,
+    .btn__secondary:focus {
+        background-color: #1a1a1a;
+        color: #eee;
+        border: 1px solid #eee;
+        box-shadow: inset 0px 4px 6px 6px #75737370;
+    }
+    
+
+}
