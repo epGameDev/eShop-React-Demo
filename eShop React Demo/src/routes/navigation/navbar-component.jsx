@@ -20,7 +20,7 @@ const NavBar = () => {
                 <li className="nav__menu-link"> <Link to={"/"}>HOME</Link> </li>
                 <li className="nav__menu-link"> <Link to={"/shop"}>SHOP</Link> </li>
                 <li className="nav__menu-link"> <Link to={"/contact"}>CONTACT US</Link> </li>
-                <li className="nav__menu-link"> <Link to={"/sign-in"}>SIGN IN</Link> </li>
+                <li className="nav__menu-link"> <Link to={"/account"}>SIGN IN</Link> </li>
             </ul>
         </nav>
         <Outlet/>

@@ -1,12 +1,13 @@
 import { useNavigate } from "react-router-dom";
-import SignUpForm from "../../components/sign-up-form/sign-up-form-component";
 import { googlePopUpSignIn, createUserDocumentFromAuth } from "../../utils/firebase/firebase-utils";
 
+import SignUpForm from "../../components/sign-up-form/sign-up-form-component";
+import SignIn from "../../components/sign-in-component/sign-in-component";
 
-import "./sign-in-styles.scss";
+import "./account-styles.scss";
 import Button from "../../components/button/button-component";
 
-const SignIn = () => {
+const Account = () => {
     const navigateTo = useNavigate();
 
     const logGoogleUser = async () => {
@@ -22,9 +23,12 @@ const SignIn = () => {
             <Button buttonType={"google"} onClick={logGoogleUser} text={"Sign In With Google"} />
 
             <hr/>
-            <SignUpForm />
+            <div className="account__forms-container">
+                <SignIn />
+                <SignUpForm />
+            </div>
         </main>
     )
 }
 
-export default SignIn;
+export default Account;
