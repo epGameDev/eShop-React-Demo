@@ -4,7 +4,7 @@ import { createAuthUser_EmailAndPassword, createUserDocumentFromAuth } from "../
 import Button from "../button/button-component";
 
 import "./sign-up-form-styles.scss";
-import "../../index.scss"
+// import "../../index.scss"
 
 const defaultFormFields = {
   displayName: "",
@@ -57,7 +57,7 @@ const SignUpForm = () => {
 
   return (
     <div className="form__sign-up-container">
-      <h2>Creating An Account?</h2>
+      <h2>Don&apos;t Have An Account?</h2>
       <h4>Sign up below!</h4>
 
       <form method="POST" onSubmit={handleSubmit}>
