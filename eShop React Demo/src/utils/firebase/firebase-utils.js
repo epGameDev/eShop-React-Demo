@@ -5,6 +5,8 @@ import {
   signInWithPopup, 
   GoogleAuthProvider,
   createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  signOut,
 } from "firebase/auth";
 import { getFirestore, doc, getDoc, setDoc } from "firebase/firestore";
 
@@ -68,6 +70,47 @@ export const createUserDocumentFromAuth = async (userAuth, args = {}) => {
 export const createAuthUser_EmailAndPassword = async (email, password) => {
 
   if ( !email || !password ) return;
-
+  
+  
   return await createUserWithEmailAndPassword(auth, email, password);
+}
+
+
+export const signInUser = (email, password) => {
+  const user = auth.currentUser;
+  
+  
+  if (user)
+  {
+    return alert("You are already signed in")
+  }
+  else if (!user)
+  {
+    signInWithEmailAndPassword(auth, email, password)
+    .then((userCredential) => {
+      console.log(userCredential);
+    })
+    .catch((error) =>  console.log(error));
+
+    alert("You are now signed in!");
+  }
+  else
+  {
+    alert("You need to create an account")
+  }
+
+}
+
+
+export const signOutUser = () => {
+  const user = auth.currentUser;
+
+  signOut(auth)
+  .then(() => {
+    alert(`${user.email} is now signed out.`)
+  })
+  .catch((error) => {
+    console.log(`There was an error signing out: ${error}`);
+  })
+
 }

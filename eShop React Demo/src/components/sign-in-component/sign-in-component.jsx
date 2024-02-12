@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { googlePopUpSignIn, createUserDocumentFromAuth } from "../../utils/firebase/firebase-utils";
+import { googlePopUpSignIn, createUserDocumentFromAuth, signInUser, signOutUser } from "../../utils/firebase/firebase-utils";
 
 import Button from "../button/button-component";
 
@@ -19,9 +19,9 @@ const SignIn = () => {
 
     const logGoogleUser = async () => {
 
-        const { user} = await googlePopUpSignIn();
-        await createUserDocumentFromAuth(user);
-        navigateTo('/');
+      const { user} = await googlePopUpSignIn();
+      await createUserDocumentFromAuth(user);
+      navigateTo('/');
     }
     
     
@@ -37,9 +37,11 @@ const SignIn = () => {
     }
 
     const handleSubmit = async (event) => {
-        event.preventDefault();
+        event.preventDefault(); // prevents page from reloading.
 
-        navigateTo('/');
+        signInUser(email, password);
+
+        // navigateTo('/');
     }
     
     
@@ -87,10 +89,10 @@ const SignIn = () => {
 
         <div className="btn__login-container">
             <Button buttonType={"primary"} type="submit" text={"Sign In"}/>
-            <Button buttonType={"google"} onClick={logGoogleUser} text={"Sign In With Google"} />
         </div>
 
       </form>
+            <Button buttonType={"google"} onClick={signOutUser} text={"Sign In With Google"} />
 
     </div>
   );
