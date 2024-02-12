@@ -19,7 +19,7 @@ const SignIn = () => {
 
     const logGoogleUser = async () => {
 
-      const { user} = await googlePopUpSignIn();
+      const { user } = await googlePopUpSignIn();
       await createUserDocumentFromAuth(user);
       navigateTo('/');
     }
@@ -27,9 +27,9 @@ const SignIn = () => {
     
     //==============================//
     //========= Form Logic =========//
-
     const [formFields, setFromFields] = useState(defaultFormFields);
     const { email, password } = formFields;
+
 
     const handleChange = (event) => {
         const {name, value} = event.target;
@@ -76,7 +76,7 @@ const SignIn = () => {
             id="passwordSignIn"
             onChange={handleChange}
             value={password}
-            autoComplete="new-password"
+            autoComplete="current-password"
             minLength={8}
             maxLength={32}
             pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
@@ -89,11 +89,12 @@ const SignIn = () => {
 
         <div className="btn__login-container">
             <Button buttonType={"primary"} type="submit" text={"Sign In"}/>
+            <Button buttonType={"google"} type="button" onClick={logGoogleUser} text={"Sign In With Google"} />
         </div>
 
       </form>
-            <Button buttonType={"google"} onClick={signOutUser} text={"Sign In With Google"} />
 
+      <Button buttonType={"secondary"} type="button" onClick={signOutUser} text={"Log Out"} />
     </div>
   );
 };

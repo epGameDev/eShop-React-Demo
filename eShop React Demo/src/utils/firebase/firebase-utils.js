@@ -89,10 +89,13 @@ export const signInUser = (email, password) => {
     signInWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
       console.log(userCredential);
+      alert(`You are now signed in!`);
     })
-    .catch((error) =>  console.log(error));
+    .catch((error) =>  {
+      console.log(error);
+      alert("Wrong username or password");
+    })
 
-    alert("You are now signed in!");
   }
   else
   {
