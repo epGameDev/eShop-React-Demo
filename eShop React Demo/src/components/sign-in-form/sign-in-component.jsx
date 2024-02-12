@@ -17,7 +17,7 @@ const SignIn = () => {
     //=================================//
     //========= Google Log In =========//
 
-    const logGoogleUser = async () => {
+    const signInWithGoogle = async () => {
 
       const { user } = await googlePopUpSignIn();
       await createUserDocumentFromAuth(user);
@@ -89,7 +89,7 @@ const SignIn = () => {
 
         <div className="btn__login-container">
             <Button buttonType={"primary"} type="submit" text={"Sign In"}/>
-            <Button buttonType={"google"} type="button" onClick={logGoogleUser} text={"Sign In With Google"} />
+            <Button buttonType={"google"} type="button" onClick={signInWithGoogle} text={"Sign In With Google"} />
         </div>
 
       </form>

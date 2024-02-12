@@ -23,7 +23,7 @@ const firebaseConfig = {
 
 
 // Initialize Firebase
-const firebaseApp = initializeApp(firebaseConfig);
+initializeApp(firebaseConfig);
 
 const googleProvider = new GoogleAuthProvider();
 
@@ -41,10 +41,10 @@ export const googleSignInRedirect = () => signInWithRedirect(auth, googleProvide
 
 
 
-// Creating the Firestore Database
-export const db = getFirestore();
+// Initializing the Firestore Database
+const db = getFirestore();
 
-
+// CREATING USERS IN THE DATABASE
 export const createUserDocumentFromAuth = async (userAuth, args = {}) => {
 
     if (!userAuth) return;
@@ -60,60 +60,67 @@ export const createUserDocumentFromAuth = async (userAuth, args = {}) => {
       try {
         await setDoc(userDocRef, { displayName, email, createdAt, ...args });
       } catch (error) {
-        console.log(`Error creating user: ${error}`);
+        console.log(`Error creating user: ${error.code}`);
       }
     }
 
     return userDocRef;
 }
 
+
+// CREATING USER ACCOUNT VIA EMAIL/PASSWORD
 export const createAuthUser_EmailAndPassword = async (email, password) => {
 
   if ( !email || !password ) return;
-  
-  
   return await createUserWithEmailAndPassword(auth, email, password);
 }
 
 
-export const signInUser = (email, password) => {
+// SIGNING IN USER VIA USERNAME/PASSWORD
+export const signInUser = async (email, password) => {
+
+  if (!email || !password) return;
   const user = auth.currentUser;
+  if (user) return alert("You are already signed in.");
   
-  
-  if (user)
-  {
-    return alert("You are already signed in")
-  }
-  else if (!user)
-  {
-    signInWithEmailAndPassword(auth, email, password)
-    .then((userCredential) => {
-      console.log(userCredential);
-      alert(`You are now signed in!`);
-    })
-    .catch((error) =>  {
-      console.log(error);
-      alert("Wrong username or password");
-    })
+  try {
+    const response = await signInWithEmailAndPassword(auth, email, password);
+    // const userUID = await response.user.uid;
 
-  }
-  else
-  {
-    alert("You need to create an account")
-  }
+    console.log(response);
+    return alert('You are now signed in!');
+    
+  } catch (error) {
 
+    switch (error.code) {
+
+      case "auth/too-many-requests":
+        alert("Too many sign in requests. Try again later");
+          break;
+
+      case "auth/invalid-credential":
+        alert("Invalid credentials. No account? Sign up!");
+          break;
+
+      default:
+        console.log(error);
+          break;
+    }
+  }
 }
 
 
-export const signOutUser = () => {
+// SIGN OUT CURRENT USERS
+export const signOutUser = async () => {
   const user = auth.currentUser;
+  if (!user) return alert("No user is signed in.");
 
-  signOut(auth)
-  .then(() => {
+  try {
+    await signOut(auth)
     alert(`${user.email} is now signed out.`)
-  })
-  .catch((error) => {
-    console.log(`There was an error signing out: ${error}`);
-  })
+    
+  } catch (error) {
+    console.log(`There was an error signing out: ${error.code}`);
+  }
 
 }
