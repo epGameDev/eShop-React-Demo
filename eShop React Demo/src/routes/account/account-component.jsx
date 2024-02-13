@@ -7,7 +7,7 @@ const Account = () => {
 
     return(
         <main className="main__container">
-            <h1>Sign In Page</h1>
+            <h1>Sign In</h1>
 
             <hr/>
             <div className="account__forms-container">

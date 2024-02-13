@@ -1,7 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { 
   getAuth, 
-  signInWithRedirect, 
   signInWithPopup, 
   GoogleAuthProvider,
   createUserWithEmailAndPassword,
@@ -22,49 +21,48 @@ const firebaseConfig = {
 
 
 
-// Initialize Firebase
+// Initialize Firebase 
 initializeApp(firebaseConfig);
 
-const googleProvider = new GoogleAuthProvider();
+// Initializing the Firestore Database
+const db = getFirestore();
 
+
+// Google Provider Setup
+const googleProvider = new GoogleAuthProvider();
 googleProvider.setCustomParameters({
   prompt: "select_account"
 });
 
 
-
-// Authenticating Users
+// Authenticating Initialization 
 export const auth = getAuth();
 export const googlePopUpSignIn = () => signInWithPopup( auth, googleProvider );
-export const googleSignInRedirect = () => signInWithRedirect(auth, googleProvider); 
 
 
 
-
-// Initializing the Firestore Database
-const db = getFirestore();
 
 // CREATING USERS IN THE DATABASE
 export const createUserDocumentFromAuth = async (userAuth, args = {}) => {
 
-    if (!userAuth) return;
+  if (!userAuth) return;
 
-    const userDocRef = doc(db, "users", userAuth.uid);
-    const userSnapShot = await getDoc(userDocRef);
+  const userDocRef = doc(db, "users", userAuth.uid);
+  const userSnapShot = await getDoc(userDocRef);
 
-    // if user data doesn't exist, create new data
-    if (!userSnapShot.exists()){
-      const { displayName, email } = userAuth;
-      const createdAt = new Date();
-      
-      try {
-        await setDoc(userDocRef, { displayName, email, createdAt, ...args });
-      } catch (error) {
-        console.log(`Error creating user: ${error.code}`);
-      }
+  // if user data doesn't exist, create new data
+  if (!userSnapShot.exists()){
+    const { displayName, email } = userAuth;
+    const createdAt = new Date();
+    
+    try {
+      await setDoc(userDocRef, { displayName, email, createdAt, ...args });
+    } catch (error) {
+      console.log(`Error creating user: ${error.code}`);
     }
+  }
 
-    return userDocRef;
+  return userDocRef;
 }
 
 
@@ -85,12 +83,14 @@ export const signInUser = async (email, password) => {
   
   try {
     const response = await signInWithEmailAndPassword(auth, email, password);
-    // const userUID = await response.user.uid;
+    // const userName = await response.user.displayName;
 
-    console.log(response);
-    return alert('You are now signed in!');
+    alert(`Hi, You are now signed in!`);
+
+    return response;
     
-  } catch (error) {
+  } 
+  catch (error) {
 
     switch (error.code) {
 
@@ -116,11 +116,14 @@ export const signOutUser = async () => {
   if (!user) return alert("No user is signed in.");
 
   try {
-    await signOut(auth)
+    const response = await signOut(auth)
     alert(`${user.email} is now signed out.`)
-    
+    return response;
+
   } catch (error) {
     console.log(`There was an error signing out: ${error.code}`);
+
   }
 
 }
+

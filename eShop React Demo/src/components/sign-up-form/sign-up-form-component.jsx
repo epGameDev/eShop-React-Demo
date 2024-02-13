@@ -1,5 +1,7 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { useNavigate } from 'react-router-dom';
+
+import { UserContext } from "../../contexts/user.context";
 import { createAuthUser_EmailAndPassword, createUserDocumentFromAuth } from "../../utils/firebase/firebase-utils";
 import Button from "../button/button-component";
 
@@ -19,6 +21,8 @@ const SignUpForm = () => {
 
   const [formFields, setFromFields] = useState(defaultFormFields);
   const { displayName, email, password, confirmPassword } = formFields;
+
+  const {setCurrentUser} = useContext(UserContext);
 
   const resetFormFields = () => {
     return setFromFields(defaultFormFields);
@@ -40,6 +44,7 @@ const SignUpForm = () => {
     try {
       const { user } = await createAuthUser_EmailAndPassword(email, password);
       await createUserDocumentFromAuth(user, { displayName });
+      setCurrentUser(user);
       resetFormFields();
 
     } 

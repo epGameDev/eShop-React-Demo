@@ -1,11 +1,22 @@
-import { Fragment } from "react";
+import { Fragment, useContext } from "react";
 import { Outlet, Link } from "react-router-dom";
+import { UserContext } from "../../contexts/user.context";
+import { signOutUser } from "../../utils/firebase/firebase-utils";
 
 import "./navbar-styles.scss";
 import logo from "../../assets/crown.svg"
 
 
 const NavBar = () => {
+
+  const { currentUser, setCurrentUser } = useContext(UserContext);
+
+  const signOutCurrentUser = async (event) => {
+    event.preventDefault();
+
+    await signOutUser();
+    setCurrentUser(null);
+  }
 
     return (
       <Fragment>
@@ -20,7 +31,11 @@ const NavBar = () => {
                 <li className="nav__menu-link"> <Link to={"/"}>HOME</Link> </li>
                 <li className="nav__menu-link"> <Link to={"/shop"}>SHOP</Link> </li>
                 <li className="nav__menu-link"> <Link to={"/contact"}>CONTACT US</Link> </li>
-                <li className="nav__menu-link"> <Link to={"/account"}>SIGN IN</Link> </li>
+                {
+                  currentUser 
+                  ? (<li onClick={signOutCurrentUser} className="nav__menu-link">SIGN OUT</li>) 
+                  : (<li className="nav__menu-link"> <Link to={"/account"}>SIGN IN</Link> </li>)
+                }
             </ul>
         </nav>
         <Outlet/>
