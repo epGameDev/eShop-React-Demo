@@ -1,7 +1,6 @@
-import { useState, useContext } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { googlePopUpSignIn, createUserDocumentFromAuth, signInUser } from "../../utils/firebase/firebase-utils";
-import { UserContext } from "../../contexts/user.context";
+import { googlePopUpSignIn, signInUser } from "../../utils/firebase/firebase-utils";
 
 import Button from "../button/button-component";
 
@@ -18,21 +17,17 @@ const SignIn = () => {
   
   //=================================//
   //========= Google Log In =========//
-
   const signInWithGoogle = async () => {
 
-    const { user } = await googlePopUpSignIn();
-    await createUserDocumentFromAuth(user);
-    setCurrentUser(user)
+    await googlePopUpSignIn();
     navigateTo('/');
   }
-  
+
   
   //==============================//
   //========= Form Logic =========//
   const [formFields, setFromFields] = useState(defaultFormFields);
   const { email, password } = formFields;
-  const { setCurrentUser } = useContext(UserContext);
 
 
   const resetFormFields = () => {
@@ -49,18 +44,18 @@ const SignIn = () => {
   const handleSubmit = async (event) => {
     event.preventDefault(); // prevents page from reloading.
 
-    const { user } = await signInUser(email, password);
-    setCurrentUser(user)
+    await signInUser(email, password);
     resetFormFields();
     navigateTo('/');
   }
     
+  
     
   //=============================//
   //========= Component =========//
   return (
     <div className="form__sign-in-container">
-      <h2>Already A Member?</h2>
+      <h2>Already A Customer?</h2>
       <h4>Sign In!</h4>
 
       <form method="POST" onSubmit={handleSubmit}>
@@ -105,7 +100,6 @@ const SignIn = () => {
 
       </form>
 
-      {/* <Button buttonType={"secondary"} type="button" onClick={signOutUser} text={"Log Out"} /> */}
     </div>
   );
 };

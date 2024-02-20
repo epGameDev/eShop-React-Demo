@@ -6,6 +6,7 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signOut,
+  onAuthStateChanged,
 } from "firebase/auth";
 import { getFirestore, doc, getDoc, setDoc } from "firebase/firestore";
 
@@ -42,7 +43,8 @@ export const googlePopUpSignIn = () => signInWithPopup( auth, googleProvider );
 
 
 
-// CREATING USERS IN THE DATABASE
+//==================================================//
+//========= CREATING USERS IN THE DATABASE =========//
 export const createUserDocumentFromAuth = async (userAuth, args = {}) => {
 
   if (!userAuth) return;
@@ -66,7 +68,9 @@ export const createUserDocumentFromAuth = async (userAuth, args = {}) => {
 }
 
 
-// CREATING USER ACCOUNT VIA EMAIL/PASSWORD
+
+//============================================================//
+//========= CREATING USER ACCOUNT VIA EMAIL/PASSWORD =========//
 export const createAuthUser_EmailAndPassword = async (email, password) => {
 
   if ( !email || !password ) return;
@@ -74,7 +78,9 @@ export const createAuthUser_EmailAndPassword = async (email, password) => {
 }
 
 
-// SIGNING IN USER VIA USERNAME/PASSWORD
+
+//=========================================================//
+//========= SIGNING IN USER VIA USERNAME/PASSWORD =========//
 export const signInUser = async (email, password) => {
 
   if (!email || !password) return;
@@ -87,8 +93,7 @@ export const signInUser = async (email, password) => {
 
     alert(`Hi, You are now signed in!`);
 
-    return response;
-    
+    return response; 
   } 
   catch (error) {
 
@@ -110,7 +115,9 @@ export const signInUser = async (email, password) => {
 }
 
 
-// SIGN OUT CURRENT USERS
+
+//==========================================//
+//========= SIGN OUT CURRENT USERS =========//
 export const signOutUser = async () => {
   const user = auth.currentUser;
   if (!user) return alert("No user is signed in.");
@@ -127,3 +134,8 @@ export const signOutUser = async () => {
 
 }
 
+
+
+//================================================//
+//========= Observing Auth State Changes =========//
+export const onAuthStateChangedListener = (callback) => onAuthStateChanged(auth, callback);

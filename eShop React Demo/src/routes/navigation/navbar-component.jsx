@@ -9,17 +9,10 @@ import logo from "../../assets/crown.svg"
 
 const NavBar = () => {
 
-  const { currentUser, setCurrentUser } = useContext(UserContext);
-
-  const signOutCurrentUser = async (event) => {
-    event.preventDefault();
-
-    await signOutUser();
-    setCurrentUser(null);
-  }
-
-    return (
-      <Fragment>
+  const { currentUser } = useContext(UserContext);
+  
+  return (
+    <Fragment>
         <nav className="main__nav-bar">
             <div className="nav__logo-container">
                 <Link className="nav__logo" to={"/"}>
@@ -33,7 +26,7 @@ const NavBar = () => {
                 <li className="nav__menu-link"> <Link to={"/contact"}>CONTACT US</Link> </li>
                 {
                   currentUser 
-                  ? (<li onClick={signOutCurrentUser} className="nav__menu-link">SIGN OUT</li>) 
+                  ? (<li onClick={signOutUser} className="nav__menu-link">SIGN OUT</li>) 
                   : (<li className="nav__menu-link"> <Link to={"/account"}>SIGN IN</Link> </li>)
                 }
             </ul>
