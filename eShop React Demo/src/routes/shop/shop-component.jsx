@@ -1,7 +1,8 @@
 const Shop = () => {
     return(
         <main className="main__container">
-            <h1>Welcome To Our Shop!!</h1>
+            <h1>Featured Product</h1>
+            <hr/>
         </main>
     )
 }
