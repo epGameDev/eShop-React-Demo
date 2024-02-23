@@ -25,14 +25,17 @@
     justify-content: flex-end;
     list-style: none;
 
-    .nav__menu-link {
+    .nav__menu-link{
       padding: 10px 15px;
+    }
+
+    .nav__menu-link a{
       cursor: pointer;
       transition: all 5ms ease-in;
 
     }
 
-    .nav__menu-link:hover{
+    .nav__menu-link a:hover{
       transform : scale(1.15);
       text-decoration: underline;
       text-underline-offset: 4px;
