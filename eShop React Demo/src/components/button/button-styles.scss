@@ -57,5 +57,19 @@
         box-shadow: inset 0px 4px 6px 6px #75737370;
     }
     
+    .btn__clear{
+        background-color: #1a1a1a00;
+        color: #eee;
+        border: 1px solid #eee;
+        border-radius: 0px;
+    }
+
+    .btn__clear:hover,
+    .btn__clear:focus {
+        background-color: #fff;
+        color: #1a1a1a;
+        border: 1px solid #000;
+        box-shadow: inset 0px -4px 7px 1px #c9c9c933;
+    }
 
 }

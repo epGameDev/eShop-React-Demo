@@ -3,8 +3,11 @@ import { Outlet, Link } from "react-router-dom";
 import { UserContext } from "../../contexts/user.context";
 import { signOutUser } from "../../utils/firebase/firebase-utils";
 
+import { CartIcon } from "../../components/cart-icon/cart-icon-component";
+import { CartDropdown } from "../../components/cart-dropdown/cart-dropdown-component";
+import logo from "../../assets/crown.svg";
 import "./navbar-styles.scss";
-import logo from "../../assets/crown.svg"
+
 
 
 const NavBar = () => {
@@ -29,6 +32,8 @@ const NavBar = () => {
                   ? (<li onClick={signOutUser} className="nav__menu-link">SIGN OUT</li>) 
                   : (<li className="nav__menu-link"> <Link to={"/account"}>SIGN IN</Link> </li>)
                 }
+                <CartIcon/>
+                <CartDropdown />
             </ul>
         </nav>
         <Outlet/>

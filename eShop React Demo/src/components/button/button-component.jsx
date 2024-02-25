@@ -4,8 +4,8 @@ import "./button-styles.scss";
 const BTN_TYPE_CLASSES = {
     google: "btn__google",
     primary: "btn__primary",
-    secondary: "btn__secondary"
-
+    secondary: "btn__secondary",
+    clear: "btn__clear"
 }
 
 const Button = ({ text, buttonType, ...btnProps }) => {

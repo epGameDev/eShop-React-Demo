@@ -1,5 +1,6 @@
 import {Routes, Route } from "react-router-dom";
 
+
 import NavBar from "./routes/navigation/navbar-component";
 import Home from "./routes/home/home-component";
 import Shop from "./routes/shop/shop-component";
@@ -17,6 +18,7 @@ const App = () => {
         <Route path="/contact" element={<Contact/>}/>
         <Route path="/account" element={<Account/>}/>
       </Route>
+
     </Routes>
   );
 };
