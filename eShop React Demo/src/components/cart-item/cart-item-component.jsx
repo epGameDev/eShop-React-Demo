@@ -4,12 +4,16 @@ import PropTypes from "prop-types";
 import "./cart-item-styles.scss";
 
 export const CartItem = ({item}) => {
-    const { name, quantity } = item;
+    const { name, quantity, imageUrl, price } = item;
 
     return (
         <div className="cart__container">
-            <h2>{name}</h2>
-            <span>{quantity}</span>
+            <img src={imageUrl} alt={name} />
+            <div>
+                <h5>{name}</h5>
+                <span>{quantity}</span>
+                <span>${price}.00</span>
+            </div>
         </div>
     );
 }

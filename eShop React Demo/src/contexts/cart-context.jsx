@@ -12,14 +12,13 @@ export const CartContext = createContext({
 
 const addCartItem = (cartItems, productToAdd) => {
     // TODO: [ ] Find if cart items contains productsToAdd.
-    
-    cartItems.push(productToAdd);
-    console.log(cartItems);
+    if (cartItems) {
+        cartItems.push(productToAdd);
+    }
 
-    return cartItems;
     // TODO: [ ] If found, increment the quantity.
-
     // TODO: [ ] return a new array with modified values/ new cart item
+    return cartItems;
 }
 
 export const CartProvider = ({children}) => {
@@ -31,7 +30,7 @@ export const CartProvider = ({children}) => {
         setCartItems(addCartItem(cartItems, productToAdd))
     }
 
-    const value = {isCartOpen, setIsCartOpen, addItemToCart };
+    const value = {isCartOpen, setIsCartOpen, addItemToCart, cartItems };
 
     return (
         <CartContext.Provider value={value}>

@@ -13,7 +13,6 @@ import "./navbar-styles.scss";
 const NavBar = () => {
 
   const { currentUser } = useContext(UserContext);
-  
   return (
     <Fragment>
         <nav className="main__nav-bar">
