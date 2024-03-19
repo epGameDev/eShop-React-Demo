@@ -1,5 +1,4 @@
 import { useContext } from "react";
-import PropTypes from "prop-types"
 import { CartContext } from "../../contexts/cart-context";
 
 import Button from "../button/button-component";
@@ -16,7 +15,7 @@ export const CartDropdown = () => {
         <div className="dropdown__cart-container">
           <div className="dropdown__cart-items">
             {
-              cartItems 
+              cartItems.length > 0
               ? cartItems.map( product => <CartItem key={product.id} item={product} /> )
               : <p>Cart is empty...</p>
             }
@@ -27,15 +26,3 @@ export const CartDropdown = () => {
     </div>
   );
 };
-
-// CartDropdown.propTypes = {
-//   productsInCart: PropTypes.arrayOf(
-//     PropTypes.shape({
-//       id: PropTypes.number.isRequired,
-//       name: PropTypes.string.isRequired,
-//       imageUrl: PropTypes.string.isRequired,
-//       price: PropTypes.string.isRequired,
-//     })
-//   ),
-// }
-

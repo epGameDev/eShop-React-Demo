@@ -6,16 +6,14 @@ import "./product-card-styles.scss";
 import { useContext } from "react";
 
 export const ProductCard = ({product}) => {
-  const {addItemToCart} = useContext(CartContext);
+  
+  const { addItemToCart } = useContext(CartContext);
 
   if (!product) return;
   const {imageUrl, name, price} = product;
 
-  const addToCart = () => {
-    addItemToCart(product)
-  }
+  const addToCart = () => addItemToCart(product);
   
-
   return (
     <div className="product__card">
       <div className="product__card-image-container">

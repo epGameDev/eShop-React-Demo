@@ -7,7 +7,7 @@ import "./cart-icon-styles.scss";
 
 
 export const CartIcon = () => {
-    const { isCartOpen, setIsCartOpen } = useContext(CartContext);
+    const { isCartOpen, setIsCartOpen, cartItems } = useContext(CartContext);
 
     // Class toggle works too but practicing useContext.
     const dropdownHandler = () => {
@@ -17,7 +17,7 @@ export const CartIcon = () => {
     return (
         <div className="icon__container">
             <img onClick={dropdownHandler} className="icon__shopping-bag" src={ShoppingBag} alt="icon for shopping bag" />
-            <span className="item-count">0</span>
+            <span className="item-count">{cartItems.length}</span>
         </div>
     )
 }

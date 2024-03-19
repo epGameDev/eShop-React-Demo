@@ -8,4 +8,10 @@
         aspect-ratio: 1/1;
         object-fit: cover;
     }
+
+    .cart__product-price {
+        width: 8rem;
+        display: flex;
+        justify-content: space-between;
+    }
 }

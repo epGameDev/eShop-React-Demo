@@ -10,17 +10,31 @@ export const CartContext = createContext({
     }
 });
 
-const addCartItem = (cartItems, productToAdd) => {
-    // TODO: [ ] Find if cart items contains productsToAdd.
-    if (cartItems) {
-        cartItems.push(productToAdd);
-    }
 
-    // TODO: [ ] If found, increment the quantity.
-    // TODO: [ ] return a new array with modified values/ new cart item
-    return cartItems;
+
+//===============================//
+//========= Add To Cart =========//
+const addCartItem = (cartItems, productToAdd) => 
+{
+    const existingCartItem = cartItems.find( product => product.id === productToAdd.id);
+
+    if (existingCartItem){
+
+        return cartItems.map(productInCart => 
+            {
+                return productInCart.id === productToAdd.id 
+                ? {...productInCart, quantity: productInCart.quantity + 1}
+                : productInCart
+            } 
+        );
+    }
+    
+    return [...cartItems, {...productToAdd, quantity: 1}];
 }
 
+
+//=================================//
+//========= Cart Provider =========//
 export const CartProvider = ({children}) => {
     
     const [cartItems, setCartItems] = useState([]);
