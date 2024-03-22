@@ -6,7 +6,7 @@ import CheckoutCard from "../../components/checkout-card/checkout-card-component
 import "./checkout-styles.scss";
 
 const Checkout = ()  => {
-    const { cartItems, setCartItems } = useContext(CartContext);
+    const { cartItems, checkoutTotal } = useContext(CartContext);
 
     return (
         <main className="main__container checkout__page">
@@ -16,7 +16,7 @@ const Checkout = ()  => {
             <h2>Shopping Cart:</h2>
             <div className="checkout__cart-container">
                 { 
-                    cartItems.length <= 0 
+                    cartItems.length <= 0 && cartItems
                     ? <h3>Your cart is empty</h3>
                     : cartItems.map( product => <CheckoutCard key={product.id} product={product} /> ) 
                 }
@@ -26,7 +26,7 @@ const Checkout = ()  => {
             <hr/>
             <div className="total__price">
                 <h4>Total: </h4>
-                <span>${0.00}</span>
+                <span>${checkoutTotal}</span>
 
             </div>
         </main>
