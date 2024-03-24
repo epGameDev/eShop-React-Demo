@@ -5,9 +5,9 @@ import PropTypes from "prop-types";
 export const CartContext = createContext({ 
     isCartOpen: true,
     cartItems: [],
-    addItemToCart: () => {
-        
-    },
+    addItemToCart: () => {  },
+    updateItemInCart: () => {  },
+    removeItemInCart: () => { }, 
     cartCount: 0,
     checkoutTotal: 0
 });
@@ -41,13 +41,7 @@ const addCartItem = (cartItems, productToAdd) =>
 //========= Removing Cart Item =========//
 const removeCartItem = (cartItems, productToRemove) => 
 {
-    const productInCart = cartItems.find(product => product.id === productToRemove.id);
-    if (productInCart) {
-        const index = cartItems.indexOf(productInCart)
-        cartItems.splice(index, 1);
-    }
-    
-    return [...cartItems];
+    return cartItems.filter(product => product.id !== productToRemove.id);
 }
 
 
@@ -57,7 +51,7 @@ const removeCartItem = (cartItems, productToRemove) =>
 const updateProductQuantity = (cartItems, productToUpdate, value) => 
 {
     const productInCart = cartItems.find(product => product.id === productToUpdate.id);
-    if (value <= 0)
+    if (value < 1)
     {
         value = 0;
         return removeCartItem(cartItems, productToUpdate);
