@@ -10,7 +10,7 @@ export const CartItem = ({item}) => {
         <div className="cart__container">
             <img src={imageUrl} alt={name} />
             <div>
-                <h5>{name}</h5>
+                <h4>{name}</h4>
                 <div className="cart__product-price">
                     <span>{quantity} &nbsp; x </span>
                     <span> ${price}.00</span>

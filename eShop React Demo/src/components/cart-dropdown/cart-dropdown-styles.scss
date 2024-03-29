@@ -23,9 +23,15 @@
     min-height: 15rem;
     display: flex;
     flex-direction: column;
-    overflow: scroll;
+    overflow-y: scroll;
+    scrollbar-width: none;
   }
 
+  .dropdown__cart-items:-webkit-scrollbar { 
+    display: none;
+  }
+
+  
   button {
     margin-top: min(2rem, 100%);
     width: 100%;

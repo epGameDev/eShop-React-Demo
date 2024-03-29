@@ -7,8 +7,8 @@ import Button from "../button/button-component";
 import "./sign-in-styles.scss";
 
 const defaultFormFields = {
-    email: "",
-    password: "",
+  email: "",
+  password: "",
 }
 
 const SignIn = () => {

@@ -44,7 +44,7 @@ const SignUpForm = () => {
       const { user } = await createAuthUser_EmailAndPassword(email, password);
       await createUserDocumentFromAuth(user, { displayName });
       resetFormFields();
-
+      navigateTo('/');
     } 
     catch (error) {
       if (error.code === "auth/email-already-in-use") {
@@ -54,7 +54,6 @@ const SignUpForm = () => {
 
     }
 
-    navigateTo('/');
   }
 
 

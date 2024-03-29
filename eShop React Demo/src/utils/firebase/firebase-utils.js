@@ -8,7 +8,17 @@ import {
   signOut,
   onAuthStateChanged,
 } from "firebase/auth";
-import { getFirestore, doc, getDoc, setDoc } from "firebase/firestore";
+
+import { 
+  getFirestore,
+  doc,
+  getDoc,
+  setDoc,
+  collection,
+  writeBatch,
+  query,
+  getDocs
+} from "firebase/firestore";
 
 
 const firebaseConfig = {
@@ -135,7 +145,38 @@ export const signOutUser = async () => {
 }
 
 
-
 //================================================//
 //========= Observing Auth State Changes =========//
 export const onAuthStateChangedListener = (callback) => onAuthStateChanged(auth, callback);
+
+
+export const createCollectionsAndDocuments = async (collectionKey, objectsToAdd) => {
+  const collectionRef = collection(db, collectionKey); // Structure: collection key > Document > Field Entry
+  const batch = writeBatch(db);
+
+  objectsToAdd.forEach(obj => {
+    const docRef = doc(collectionRef, obj.title.toLowerCase());
+
+    batch.set(docRef, obj);
+  });
+
+  await batch.commit();
+
+  console.log("done batch");
+}
+
+
+export const getCategoriesAndDocuments = async () => {
+  const collectionRef = collection(db, "categories");
+  const queryData = query(collectionRef);
+  const querySnapshot = await getDocs(queryData);
+
+  const categoryMap = querySnapshot.docs.reduce( (acc, docSnapshot) => {
+    const {title, items} = docSnapshot.data();
+    acc[title.toLowerCase()] = items;
+    return acc;
+  }, {});
+
+  return categoryMap;
+
+}
