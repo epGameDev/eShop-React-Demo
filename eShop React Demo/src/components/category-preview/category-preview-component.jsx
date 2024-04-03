@@ -9,7 +9,7 @@ const CategoryPreview = ({title, products}) => {
     return (
         <div className="category__preview-container">
             <h2>
-                <span className="category__preview-title">{title.charAt(0).toUpperCase() + title.slice(1)}</span>
+                <span className="category__preview-title">{`${title.charAt(0).toUpperCase() + title.slice(1)} `} </span>
             </h2>
 
             <div className="category__product-preview">
