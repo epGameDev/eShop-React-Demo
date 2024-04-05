@@ -1,3 +1,4 @@
+import {Link} from "react-router-dom";
 import PropTypes from "prop-types";
 
 import { ProductCard } from "../product-card/product-card-component";
@@ -9,7 +10,9 @@ const CategoryPreview = ({title, products}) => {
     return (
         <div className="category__preview-container">
             <h2>
-                <span className="category__preview-title">{`${title.charAt(0).toUpperCase() + title.slice(1)} `} </span>
+                <Link to={`/shop/${title}`}>
+                    <span className="category__preview-title">{`${title.charAt(0).toUpperCase() + title.slice(1)} `} </span>
+                </Link>
             </h2>
 
             <div className="category__product-preview">
