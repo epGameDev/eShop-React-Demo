@@ -37,6 +37,7 @@ export const NavbarLink = styled.li`
   cursor: pointer;
   transition: all 5ms ease-in;
   &:hover {
+    font-weight: 600;
     text-decoration: underline;
     text-underline-offset: 4px;
   }

@@ -25,7 +25,7 @@ const NavBar = () => {
             <NavbarMenuLinks>
                 <NavbarLink className="nav__menu-link"> <Link to={"/"}>HOME</Link> </NavbarLink>
                 <NavbarLink className="nav__menu-link"> <Link to={"/shop"}>SHOP</Link> </NavbarLink>
-                <NavbarLink className="nav__menu-link"> <Link to={"/contact"}>CONTACT US</Link> </NavbarLink>
+                {/* <NavbarLink className="nav__menu-link"> <Link to={"/contact"}>CONTACT US</Link> </NavbarLink> */}
                 {
                   currentUser 
                   ? (<NavbarLink onClick={signOutUser} className="nav__menu-link">SIGN OUT</NavbarLink>) 
