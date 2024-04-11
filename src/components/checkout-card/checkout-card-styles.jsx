@@ -1,4 +1,6 @@
-.checkout__product-card{
+import styled from "styled-components";
+
+export const CheckoutProductCard = styled.div`
     margin: auto;
     width: 100%;
     max-width: 1200px;
@@ -49,24 +51,23 @@
         font-weight: 900;
         cursor: pointer;
     }
-
-}
-
-@media (max-width: 550px) {
-    .checkout__product-card{
-        flex-wrap: wrap;
-
-        .checkout__img-container{
-            max-width: 6rem;
-            max-height: 6rem;
+    
+    &:media (max-width: 550px) {
+        .checkout__product-card{
+            flex-wrap: wrap;
+    
+            .checkout__img-container{
+                max-width: 6rem;
+                max-height: 6rem;
+            }
+        }
+    
+        .checkout__product-details{
+            flex-wrap: wrap;
+        }
+    
+        h3{
+            margin: 0;
         }
     }
-
-    .checkout__product-details{
-        flex-wrap: wrap;
-    }
-
-    h3{
-        margin: 0;
-    }
-}
+`

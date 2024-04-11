@@ -1,12 +1,16 @@
-.product__card {
-  width: 100%;
-  max-width: 20rem; //320px
-  background: #242424;
-  color: #eee;
-  border-radius: 4px;
-  overflow: hidden;
-  position: relative;
-  justify-self: center;
+import styled from "styled-components";
+
+//max-width: 20rem; //320px;
+export const ProductCardContainer = styled.div`
+    min-width: 20rem;
+    max-width: 30rem;
+    width: 100%;
+    background: #242424;
+    color: #eee;
+    border-radius: 4px;
+    overflow: hidden;
+    position: relative;
+    justify-self: center;
   
     p {
       padding: 0 1.2rem;
@@ -45,6 +49,7 @@
     }
 
     .product__card-details{
+        min-height: 7.4rem;
         div{
             padding-top: 0.5em;
         }
@@ -53,13 +58,10 @@
     .product__name{
         font-size: 1.2rem;
     }
-
-
-}
-
-
-@media screen and (max-width: 635px) {
-    .product__card{
-        min-width: 70%;
+    
+    &:media screen and (max-width: 635px) {
+        .product__card{
+            min-width: 70%;
+        }
     }
-}
+`

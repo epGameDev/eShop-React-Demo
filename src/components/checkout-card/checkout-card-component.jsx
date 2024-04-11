@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { CartContext } from "../../contexts/cart-context";
 
 import PropTypes from "prop-types";
-import "./checkout-card-styles.scss";
+import { CheckoutProductCard } from "./checkout-card-styles.jsx";
 
 
 const CheckoutCard = ({product}) => {
@@ -15,7 +15,7 @@ const CheckoutCard = ({product}) => {
     const updateProduct = (event) => updateItemInCart(product, Number(event.target.value));
 
     return  (
-        <div className="checkout__product-card">
+        <CheckoutProductCard>
             <div className="checkout__img-container">
                 <img src={imageUrl} alt={name} />
             </div>
@@ -33,7 +33,7 @@ const CheckoutCard = ({product}) => {
                 </div>
             </div>
 
-        </div>
+        </CheckoutProductCard>
     )
 }
 

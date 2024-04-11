@@ -3,13 +3,13 @@ import { useContext } from "react";
 import { CartContext } from "../../contexts/cart-context";
 import CheckoutCard from "../../components/checkout-card/checkout-card-component";
 
-import "./checkout-styles.scss";
+import { CheckoutContainer } from "./checkout-styles.jsx";
 
 const Checkout = ()  => {
     const { cartItems, checkoutTotal } = useContext(CartContext);
 
     return (
-        <main className="main__container checkout__page">
+        <CheckoutContainer className="main__container">
             <h1>Checkout</h1>
             <hr/>
 
@@ -47,7 +47,7 @@ const Checkout = ()  => {
                 <span>${checkoutTotal}</span>
             </div>
 
-        </main>
+        </CheckoutContainer>
     )
 }
 

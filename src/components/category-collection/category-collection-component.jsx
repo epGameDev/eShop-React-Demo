@@ -1,6 +1,6 @@
 import CategoryItem from "../category-item/category-item-component";
 
-import "./categories_styles.scss";
+import { CategoriesCollection } from "./categories_styles.jsx";
 
 const categories = [
     {
@@ -32,11 +32,11 @@ const categories = [
 
   const CategoryCollection = () => {
     return (
-      <section className="main__categories-container">
+      <CategoriesCollection>
 
         {categories.map( (category) => <CategoryItem category={category} key={category.id} />) }
 
-      </section>
+      </CategoriesCollection>
     )
   }
 

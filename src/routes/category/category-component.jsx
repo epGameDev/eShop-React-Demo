@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import { ProductsContext } from "../../contexts/product-context";
 import { ProductCard } from "../../components/product-card/product-card-component";
 
-import "./category-styles.scss";
+import { ProductContainer } from "./category-styles.jsx";
 
 const Category = () => {
     const { category } = useParams();
@@ -12,7 +12,6 @@ const Category = () => {
     const [products, setProducts ] = useState(categoriesMap[category]);
     
     useEffect(() => {
-        console.log(category);
         setProducts(categoriesMap[category])
     }, [category, categoriesMap])
     
@@ -20,13 +19,13 @@ const Category = () => {
     return (
         <>
             <h2>{category.charAt(0).toUpperCase() + category.slice(1)}</h2>
-            <div className="product__container">
+            <ProductContainer>
                 {
                     products 
                     ? products.map( product => <ProductCard key={product.id} product={product}/>) 
                     : <h2>Loading...</h2>
                 }
-            </div>
+            </ProductContainer>
         </>
     )
 }

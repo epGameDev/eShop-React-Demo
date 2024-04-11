@@ -1,4 +1,6 @@
-.cart__container {
+import styled from "styled-components";
+
+export const CartItemContainer = styled.div`
     display: flex;
     gap: 1rem;
 
@@ -14,4 +16,4 @@
         display: flex;
         justify-content: space-between;
     }
-}
+`

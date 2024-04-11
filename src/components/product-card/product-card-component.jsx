@@ -1,9 +1,10 @@
 import PropTypes from "prop-types";
-import { CartContext } from "../../contexts/cart-context";
-
-import Button from "../button/button-component";
-import "./product-card-styles.scss";
 import { useContext } from "react";
+
+import { CartContext } from "../../contexts/cart-context";
+import Button from "../button/button-component";
+
+import { ProductCardContainer } from "./product-card-styles.jsx";
 
 export const ProductCard = ({product}) => {
   
@@ -15,7 +16,7 @@ export const ProductCard = ({product}) => {
   const addToCart = () => addItemToCart(product);
   
   return (
-    <div className="product__card">
+    <ProductCardContainer>
       <div className="product__card-image-container">
         <img src={imageUrl} alt={name} />
       </div>
@@ -27,7 +28,7 @@ export const ProductCard = ({product}) => {
         </div>
 
       </div>
-    </div>
+    </ProductCardContainer>
   );
 };
 

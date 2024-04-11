@@ -1,5 +1,6 @@
-.checkout__page {
+import styled from "styled-components";
 
+export const CheckoutContainer = styled.main`
     .checkout__cart-container{
         min-height: 30rem;
         min-height: 35dvh;
@@ -56,14 +57,14 @@
         align-items: center;
         gap: 2rem;
         font-size: 1.4rem;
-    
+
         h4{
             margin: 0;
         }
     }
-}
+    }
 
-@media (max-width: 550px) {
+    @media (max-width: 550px) {
     .checkout__cart-headers{
         flex-wrap: wrap;
 
@@ -71,5 +72,4 @@
             display: none;
         }
     }
-
-}
+`
