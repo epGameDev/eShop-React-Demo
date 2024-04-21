@@ -1,26 +1,17 @@
-.form__sign-in-container {
+import styled from "styled-components";
 
-
+export const FormSignInContainer = styled.div`
     padding: 0.5em 1em;
     max-width: 30rem;
     width: 100%;
 
-
-    h4 {
+    &h4 {
         margin: 0.7rem 0 3rem;
         color: #666;
         text-decoration: underline;
         font-size: 1.2rem;
     }
-    
-    div{
-        margin-bottom: 1.25rem;
-        max-width: 25rem;
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        position: relative;
-    }
+
 
     input, label {
         padding: 0 0.2rem;
@@ -54,7 +45,6 @@
         background-color: #eee;
     }
 
-
     input:focus {
         border-width: 1.5px;
         border-color: #01ffffe5;
@@ -69,10 +59,9 @@
         font-size: 0.75rem;
         top: -1.7rem;
         pointer-events: none;
-
+    
     }
-    
-    
+
     button{
         margin-top: 1rem;
         width: 100%;
@@ -83,4 +72,14 @@
         flex-direction: row;
         gap: 1rem;
     }
-} 
+
+`
+
+export const InputContainer = styled.div`
+    margin-bottom: 1.25rem;
+    max-width: 25rem;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+`

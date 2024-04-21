@@ -51,10 +51,11 @@ const removeCartItem = (cartItems, productToRemove) =>
 const updateProductQuantity = (cartItems, productToUpdate, value) => 
 {
     const productInCart = cartItems.find(product => product.id === productToUpdate.id);
-    if (value < 1)
+    if (value < 1 && value !== "")
     {
+        console.log(value);
         value = 0;
-        return removeCartItem(cartItems, productToUpdate);
+        // return removeCartItem(cartItems, productToUpdate);
     }
 
     productInCart.quantity = value;

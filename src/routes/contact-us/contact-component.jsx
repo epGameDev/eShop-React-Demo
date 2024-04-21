@@ -1,15 +1,15 @@
 
 
-import "./contact-styles.scss"
+import { ContactFormContainer } from "./contact-styles.jsx"
 
 const Contact = () => {
 
     return(
-        <main className="main__container contact__form-page">
+        <ContactFormContainer className="main__container">
             <h1>Contact Us</h1>
             <h4>How can we help?</h4>
             <hr/>
-        </main>
+        </ContactFormContainer>
     )
 }
 

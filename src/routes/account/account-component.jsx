@@ -1,7 +1,7 @@
 import SignUpForm from "../../components/sign-up-form/sign-up-form-component";
 import SignIn from "../../components/sign-in-form/sign-in-component";
 
-import "./account-styles.scss";
+import { Line, AccountLinkContainer} from "./account-styles.jsx";
 
 const Account = () => {
 
@@ -9,11 +9,11 @@ const Account = () => {
         <main className="main__container">
             <h1>Customer Accounts</h1>
 
-            <hr/>
-            <div className="account__forms-container">
+            <Line/>
+            <AccountLinkContainer>
                 <SignIn />
                 <SignUpForm />
-            </div>
+            </AccountLinkContainer>
         </main>
     )
 }

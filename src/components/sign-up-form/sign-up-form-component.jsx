@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { createAuthUser_EmailAndPassword, createUserDocumentFromAuth } from "../../utils/firebase/firebase-utils";
 import Button from "../button/button-component";
 
-import "./sign-up-form-styles.scss";
+import { SignUpFormContainer } from "./sign-up-form-styles.jsx";
 // import "../../index.scss"
 
 const defaultFormFields = {
@@ -58,7 +58,7 @@ const SignUpForm = () => {
 
 
   return (
-    <div className="form__sign-up-container">
+    <SignUpFormContainer>
       <h2>Don&apos;t Have An Account?</h2>
       <h4>Sign up below!</h4>
 
@@ -86,6 +86,7 @@ const SignUpForm = () => {
             value={email}
             autoComplete="email"
             pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$"
+            title="Must all be lowercase: email@example.com"
             placeholder=" "
             required
           />
@@ -128,7 +129,7 @@ const SignUpForm = () => {
 
         <Button buttonType={"primary"} type={"submit"} text={"Sign Up"}/>
       </form>
-    </div>
+    </SignUpFormContainer>
   );
 };
 

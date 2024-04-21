@@ -4,7 +4,7 @@ import { googlePopUpSignIn, signInUser } from "../../utils/firebase/firebase-uti
 
 import Button from "../button/button-component";
 
-import "./sign-in-styles.scss";
+import { FormSignInContainer, InputContainer} from "./sign-in-styles";
 
 const defaultFormFields = {
   email: "",
@@ -44,9 +44,11 @@ const SignIn = () => {
   const handleSubmit = async (event) => {
     event.preventDefault(); // prevents page from reloading.
 
-    await signInUser(email, password);
+    const result = await signInUser(email, password);
     resetFormFields();
-    navigateTo('/');
+    if (result) {
+      navigateTo('/');
+    }
   }
     
   
@@ -54,12 +56,12 @@ const SignIn = () => {
   //=============================//
   //========= Component =========//
   return (
-    <div className="form__sign-in-container">
+    <FormSignInContainer>
       <h2>Already A Customer?</h2>
       <h4>Sign In!</h4>
 
       <form method="POST" onSubmit={handleSubmit}>
-      <div>
+      <InputContainer>
           <input
             type="email"
             name="email"
@@ -73,9 +75,9 @@ const SignIn = () => {
             required
           />
           <label htmlFor="emailSignIn">Email:</label>
-        </div>
+        </InputContainer>
 
-        <div>
+        <InputContainer>
           <input
             type="password"
             name="password"
@@ -91,7 +93,7 @@ const SignIn = () => {
             required
           />
           <label htmlFor="passwordSignIn">Password</label>
-        </div>
+        </InputContainer>
 
         <div className="btn__login-container">
             <Button buttonType={"primary"} type="submit" text={"Sign In"}/>
@@ -100,7 +102,7 @@ const SignIn = () => {
 
       </form>
 
-    </div>
+    </FormSignInContainer>
   );
 };
 

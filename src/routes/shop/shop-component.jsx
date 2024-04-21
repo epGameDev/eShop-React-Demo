@@ -3,17 +3,17 @@ import { Routes, Route } from "react-router-dom";
 import Categories from "../categories/categories-component";
 import Category from "../category/category-component";
 
-import "./shop-styles.scss";
+import { ProductPageContainer } from "./shop-styles.jsx";
 
 const Shop = () => {
  
   return (
-    <main className="main__container product__page">
+    <ProductPageContainer className="main__container">
       <Routes>
         <Route index element={<Categories />}/>
         <Route path=":category" element={<Category />} />
       </Routes>     
-    </main>
+    </ProductPageContainer>
   );
 };
 
