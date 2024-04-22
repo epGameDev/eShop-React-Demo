@@ -3,11 +3,23 @@ import { Link } from "react-router-dom";
 
 export const MainNavbar = styled.nav`
   margin: 1.7rem 0;
-  padding: 0 1.7rem;
+  padding: 0rem 1.7rem;
   width: 100%;
   height: 5rem;
+  position: sticky;
+  top: 0;
   display: flex;
   justify-content: space-between;
+  z-index: 20;
+
+
+  &.sticky-nav {
+    padding: 1rem 1.17rem;
+    background-color: #ffffffcc;
+    border-radius: 50px;
+    backdrop-filter: blur(1.1px);
+    color: #000;
+  }
 `
 
 export const LogoContainer = styled(Link)`

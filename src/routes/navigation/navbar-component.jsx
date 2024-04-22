@@ -15,7 +15,7 @@ const NavBar = () => {
   const { currentUser } = useContext(UserContext);
   return (
     <Fragment>
-        <MainNavbar>
+        <MainNavbar className="sticky-nav">
             <div className="nav__logo-container">
                 <LogoContainer to={"/"}>
                     <img src={logo} alt="logo of a crown" />
@@ -23,13 +23,13 @@ const NavBar = () => {
             </div>
 
             <NavbarMenuLinks>
-                <NavbarLink className="nav__menu-link"> <Link to={"/"}>HOME</Link> </NavbarLink>
-                <NavbarLink className="nav__menu-link"> <Link to={"/shop"}>SHOP</Link> </NavbarLink>
+                <NavbarLink > <Link to={"/"}>HOME</Link> </NavbarLink>
+                <NavbarLink> <Link to={"/shop"}>SHOP</Link> </NavbarLink>
                 {/* <NavbarLink className="nav__menu-link"> <Link to={"/contact"}>CONTACT US</Link> </NavbarLink> */}
                 {
                   currentUser 
-                  ? (<NavbarLink onClick={signOutUser} className="nav__menu-link">SIGN OUT</NavbarLink>) 
-                  : (<NavbarLink className="nav__menu-link"> <Link to={"/account"}>SIGN IN</Link> </NavbarLink>)
+                  ? (<NavbarLink onClick={signOutUser}>SIGN OUT</NavbarLink>) 
+                  : (<NavbarLink> <Link to={"/account"}>SIGN IN</Link> </NavbarLink>)
                 }
                 <CartIcon/>
                 <CartDropdown />

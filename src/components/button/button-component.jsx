@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
-import "./button-styles.scss";
+
+import { ButtonContainer } from "./button-styles.jsx";
 
 const BTN_TYPE_CLASSES = {
     google: "btn__google",
@@ -12,9 +13,9 @@ const Button = ({ text, buttonType, ...btnProps }) => {
 
 
     return (
-        <div className="btn__container">
+        <ButtonContainer>
             <button className={BTN_TYPE_CLASSES[buttonType]} {...btnProps}> {text} </button>
-        </div>
+        </ButtonContainer>
     )
 
 }
