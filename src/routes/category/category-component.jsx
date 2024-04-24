@@ -8,12 +8,12 @@ import { ProductContainer } from "./category-styles.jsx";
 
 const Category = () => {
     const { category } = useParams();
-    const { categoriesMap } = useContext(ProductsContext);
-    const [products, setProducts ] = useState(categoriesMap[category]);
+    const { productCategoryMap } = useContext(ProductsContext);
+    const [products, setProducts ] = useState(productCategoryMap[category]);
     
     useEffect(() => {
-        setProducts(categoriesMap[category])
-    }, [category, categoriesMap])
+        setProducts(productCategoryMap[category])
+    }, [category, productCategoryMap])
     
 
     return (
