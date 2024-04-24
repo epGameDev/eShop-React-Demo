@@ -1,5 +1,6 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useReducer } from "react";
 import PropTypes from "prop-types";
+import { cartReducer, CART_ACTION_TYPES } from "../reducers/cart-reducer";
 
 
 export const CartContext = createContext({ 
@@ -11,75 +12,32 @@ export const CartContext = createContext({
     cartCount: 0,
     checkoutTotal: 0
 });
- 
 
-//===============================//
-//========= Add To Cart =========//
-const addCartItem = (cartItems, productToAdd) => 
-{
-    const isInCart = cartItems.find(productInCart => productInCart.id === productToAdd.id );
-
-    if (isInCart) {
-
-        // return a new array of products
-        return cartItems.map(productInCart => {
-            // if the current array already has product object with matching id, 
-            return productInCart.id === productToAdd.id
-            // clone the original and update the qty property.
-            ? {...productInCart, quantity: productInCart.quantity + 1}
-            // otherwise just pass the same product object to the new array
-            : productInCart
-        });
-    }
-
-    return [...cartItems, { ...productToAdd, quantity: 1 }]
-}
-
-
-
-//======================================//
-//========= Removing Cart Item =========//
-const removeCartItem = (cartItems, productToRemove) => 
-{
-    return cartItems.filter(product => product.id !== productToRemove.id);
-}
-
-
-
-//========================================//
-//========= Update Cart Quantity =========//
-const updateProductQuantity = (cartItems, productToUpdate, value) => 
-{
-    const productInCart = cartItems.find(product => product.id === productToUpdate.id);
-    if (value < 1 && value !== "")
-    {
-        console.log(value);
-        value = 0;
-        // return removeCartItem(cartItems, productToUpdate);
-    }
-
-    productInCart.quantity = value;
-    return [...cartItems];
+const INITIAL_STATE = {
+    isCartOpen: true,
+    cartItems: [],
+    cartCount: 0,
+    checkoutTotal: 0
 }
 
 
 //=================================//
 //========= Cart Provider =========//
 export const CartProvider = ({children}) => {
-    
-    const [cartItems, setCartItems] = useState([]);
-    const [isCartOpen, setIsCartOpen] = useState(true);
-    const [cartCount, setCartCount] = useState(0)
-    const [checkoutTotal, setCheckoutTotal] = useState(0)
-    
-    const addItemToCart = (productToAdd) => setCartItems( addCartItem(cartItems, productToAdd) );
-    const updateItemInCart = (productToUpdate, value) => setCartItems( updateProductQuantity(cartItems, productToUpdate, value) );
-    const removeItemInCart = (productToRemove) => setCartItems( removeCartItem(cartItems, productToRemove) );
 
-    useEffect(() => setCartCount(cartItems.reduce((totalInCart, item) => totalInCart += item.quantity, 0)), [cartItems]);
-    useEffect(() => setCheckoutTotal(Number(cartItems.reduce((cartTotal, item) => cartTotal += (item.price * item.quantity), 0))), [cartItems]);
-    
-    const value = {isCartOpen, setIsCartOpen, addItemToCart, removeItemInCart, updateItemInCart, cartItems, cartCount, checkoutTotal };
+    const [ {cartItems, cartCount, checkoutTotal, isCartOpen}, dispatch ] = useReducer(cartReducer, INITIAL_STATE);
+
+
+
+    const addItemToCart = (productToAdd) =>  dispatch({ type: CART_ACTION_TYPES.ADD_TO_CART, payload: productToAdd });
+    const updateItemInCart = (productToUpdate, value) =>  dispatch({ type: CART_ACTION_TYPES.UPDATE_CART, payload: productToUpdate, qty: value});
+    const removeItemInCart = (productToRemove) => dispatch({ type: CART_ACTION_TYPES.REMOVE_FROM_CART, payload: productToRemove });
+    const setIsCartOpen = (bool) => dispatch({ type: CART_ACTION_TYPES.DROP_DOWN_STATE, payload: bool })
+
+        console.log(checkoutTotal, cartItems);
+
+    const value = {isCartOpen, cartItems, cartCount, checkoutTotal, removeItemInCart, updateItemInCart, addItemToCart, setIsCartOpen };
+
     return (
         <CartContext.Provider value={value}>
             {children}

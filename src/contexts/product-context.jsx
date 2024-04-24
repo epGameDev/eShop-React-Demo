@@ -1,27 +1,29 @@
-import { createContext, useState, useEffect } from "react";
+import { createContext, useState, useEffect, } from "react";
 import PropTypes from "prop-types";
 
 import { getCategoriesAndDocuments } from "../utils/firebase/firebase-utils.js";
 
 export const ProductsContext = createContext({
-    categoriesMap: {}
+    productCategoryMap: {}
 });
 
 export const ProductsProvider = ({ children }) => {
-    const [ categoriesMap, setCategoriesMap ] = useState({});
-    const value =  { categoriesMap };
+    const [ productCategoryMap, setProductCategoryMap ] = useState({});
+    const value =  { productCategoryMap };
     
     
     
     useEffect( () => {
         const fetchData = async () => {
             const data = await getCategoriesAndDocuments();
-            setCategoriesMap(data);
+            setProductCategoryMap(data);
         }
 
         fetchData();
     }, []);
     
+
+    // ? Used once to add product to firebase from a local collection.
     // useEffect( () => {
         //     const createData = async () => await createCollectionsAndDocuments('categories', SHOP_DATA);
         //     createData();
