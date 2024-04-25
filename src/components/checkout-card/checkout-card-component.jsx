@@ -1,18 +1,19 @@
+import PropTypes from "prop-types";
 import { useContext } from "react";
 import { CartContext } from "../../contexts/cart-context";
 
-import PropTypes from "prop-types";
 import { CheckoutProductCard } from "./checkout-card-styles.jsx";
+import { CART_ACTION_TYPES } from "../../reducers/cart-reducer.js";
 
 
 const CheckoutCard = ({product}) => {
 
 
-    const { removeItemInCart, updateItemInCart } = useContext(CartContext);
+    const { dispatch } = useContext(CartContext);
     const {name, imageUrl, price, quantity } = product;
 
-    const removeProduct = () => removeItemInCart(product);
-    const updateProduct = (event) => updateItemInCart(product, Number(event.target.value));
+    const removeProduct = () => dispatch({ type: CART_ACTION_TYPES.REMOVE_FROM_CART, payload: product});
+    const updateProduct = (event) => dispatch({ type: CART_ACTION_TYPES.UPDATE_CART, payload: product, qty: Number(event.target.value) });
 
     return  (
         <CheckoutProductCard>
@@ -28,7 +29,7 @@ const CheckoutCard = ({product}) => {
                 <div className="checkout__product-totals">
                     <input type="number" name="productQty" id="productQty" min={0} max={20} defaultValue={quantity} onChange={updateProduct}/>
                     <span> x </span>
-                    <span> ${price}.00</span>
+                    <span className="price"> ${price}.00</span>
                     <span className="checkout__product-delete" onClick={removeProduct}>✖️</span>
                 </div>
             </div>

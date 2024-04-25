@@ -1,6 +1,7 @@
-const addCartItem = (cartItems, productToAdd) => 
+
+const addCartItem = ({cartItems}, productToAdd) => 
 {
-       const isInCart = cartItems.find(productInCart => productInCart.id === productToAdd.id );
+    const isInCart = cartItems.find(productInCart => productInCart.id === productToAdd.id );
 
     if (isInCart) {
 
@@ -18,15 +19,13 @@ const addCartItem = (cartItems, productToAdd) =>
     return [...cartItems, { ...productToAdd, quantity: 1 }]
 }
 
-
-const removeCartItem = (cartItems, productToRemove) => 
+const removeCartItem = ({cartItems}, productToRemove) => 
 {
     return cartItems.filter(product => product.id !== productToRemove.id);
 }
 
-const updateProductQuantity = (cartItems, productToUpdate, qty) => 
+const updateCheckoutQuantity = ({cartItems}, productToUpdate, qty) => 
 {
-    
     const productInCart = cartItems.find(product => product.id === productToUpdate.id);
     if (qty < 1 && qty !== "")
     {
@@ -38,8 +37,6 @@ const updateProductQuantity = (cartItems, productToUpdate, qty) =>
     return [...cartItems];
 }
 
-
-
 export const CART_ACTION_TYPES = {
     SET_CART_ITEMS: "SET_CART_ITEMS",
     ADD_TO_CART: "ADD_CART_ITEM",
@@ -50,56 +47,38 @@ export const CART_ACTION_TYPES = {
     DROP_DOWN_STATE: "IS_CART_OPEN"
 }
 
-
 export const cartReducer = (state, action) => {
-    const { cartItems } = state;
     const { type, payload, qty } = action;
+    let updatedCartItems = null;
 
     switch (type) {
 
-        case CART_ACTION_TYPES.ADD_TO_CART:{
-            const updatedCartItems = addCartItem(cartItems, payload);
-            const updatedCartTotal = Number(updatedCartItems.reduce((cartTotal, item) => cartTotal += (item.price * item.quantity), 0));
-            const updatedCartCount = updatedCartItems.reduce((totalInCart, item) => totalInCart += item.quantity, 0);
-
-            return {
-                ...state,
-                cartItems: updatedCartItems,
-                cartCount: updatedCartCount,
-                checkoutTotal: updatedCartTotal
-            }
-        }
-        case CART_ACTION_TYPES.UPDATE_CART:{
-            const updatedCartItems = updateProductQuantity(cartItems, payload, qty);
-            const updatedCartTotal = Number(updatedCartItems.reduce((cartTotal, item) => cartTotal += (item.price * item.quantity), 0));
-            const updatedCartCount = updatedCartItems.reduce((totalInCart, item) => totalInCart += item.quantity, 0);
-
-            return {
-                ...state,
-                cartItems: updatedCartItems,
-                cartCount: updatedCartCount,
-                checkoutTotal: updatedCartTotal
-            }
-        }
-        case CART_ACTION_TYPES.REMOVE_FROM_CART:{
-            const updatedCartItems = removeCartItem(cartItems, payload);
-            const updatedCartTotal = Number(updatedCartItems.reduce((cartTotal, item) => cartTotal += (item.price * item.quantity), 0));
-            const updatedCartCount = updatedCartItems.reduce((totalInCart, item) => totalInCart += item.quantity, 0);
-
-            return {
-                ...state,
-                cartItems: updatedCartItems,
-                cartCount: updatedCartCount,
-                checkoutTotal: updatedCartTotal
-            }
-        }
+        case CART_ACTION_TYPES.ADD_TO_CART:
+            updatedCartItems = addCartItem(state, payload);
+                break;
+        case CART_ACTION_TYPES.UPDATE_CART:
+            updatedCartItems = updateCheckoutQuantity(state, payload, qty);
+                break;
+        case CART_ACTION_TYPES.REMOVE_FROM_CART:
+            updatedCartItems = removeCartItem(state, payload);
+                break;
         case CART_ACTION_TYPES.DROP_DOWN_STATE:
             return {
                 ...state,
                 isCartOpen: payload,
             }
         default:
-            // return state;
             throw new Error(`Unhandled action type in Product Reducer: ${action}`);
     }
+
+    const updatedCartTotal = Number(updatedCartItems.reduce((cartTotal, item) => cartTotal += (item.price * item.quantity), 0));
+    const updatedCartCount = updatedCartItems.reduce((totalInCart, item) => totalInCart += item.quantity, 0);
+
+    return {
+        ...state,
+        cartItems: updatedCartItems,
+        cartCount: updatedCartCount,
+        checkoutTotal: updatedCartTotal
+    }
 }
+
