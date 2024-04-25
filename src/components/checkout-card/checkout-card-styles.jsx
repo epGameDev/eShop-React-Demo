@@ -43,6 +43,10 @@ export const CheckoutProductCard = styled.div`
                 font-weight: 600;
                 text-align: center;
             }
+
+            .price {
+                min-width: 4rem
+            }
         }
     }
 
