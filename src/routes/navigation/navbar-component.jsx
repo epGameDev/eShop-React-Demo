@@ -1,8 +1,10 @@
-import { Fragment, useContext } from "react";
+import { Fragment } from "react";
 import { Outlet, Link } from "react-router-dom";
-import { UserContext } from "../../contexts/user.context";
-import { signOutUser } from "../../utils/firebase/firebase-utils";
+import { useSelector } from "react-redux";
 
+
+import { selectCurrentUser } from "../../store/user/user-action";
+import { signOutUser } from "../../utils/firebase/firebase-utils";
 import { CartIcon } from "../../components/cart-icon/cart-icon-component";
 import { CartDropdown } from "../../components/cart-dropdown/cart-dropdown-component";
 import logo from "../../assets/crown.svg";
@@ -11,8 +13,8 @@ import { LogoContainer, MainNavbar, NavbarMenuLinks, NavbarLink } from "./navbar
 
 
 const NavBar = () => {
+  const currentUser = useSelector(selectCurrentUser);
 
-  const { currentUser } = useContext(UserContext);
   return (
     <Fragment>
         <MainNavbar className="sticky-nav">

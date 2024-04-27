@@ -1,20 +1,14 @@
-import { useContext, useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
 
-import { ProductsContext } from "../../contexts/product-context";
+
+import { selectProducts } from "../../store/product/product-actions.js";
 import { ProductCard } from "../../components/product-card/product-card-component";
-
 import { ProductContainer } from "./category-styles.jsx";
 
 const Category = () => {
     const { category } = useParams();
-    const { productCategoryMap } = useContext(ProductsContext);
-    const [products, setProducts ] = useState(productCategoryMap[category]);
-    
-    useEffect(() => {
-        setProducts(productCategoryMap[category])
-    }, [category, productCategoryMap])
-    
+    const products = useSelector(selectProducts);
 
     return (
         <>
@@ -22,7 +16,7 @@ const Category = () => {
             <ProductContainer>
                 {
                     products 
-                    ? products.map( product => <ProductCard key={product.id} product={product}/>) 
+                    ? products[`${category}`].map( product => <ProductCard key={product.id} product={product}/>) 
                     : <h2>Loading...</h2>
                 }
             </ProductContainer>

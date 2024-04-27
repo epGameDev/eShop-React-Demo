@@ -1,10 +1,13 @@
-import { compose, legacy_CreateStore as createStore, applyMiddleware, legacy_createStore } from 'redux';
+import { compose, legacy_createStore as createStore , applyMiddleware, } from 'redux';
 import { logger } from "redux-logger";
+// import thunk from "redux-thunk";
 
 import { rootReducer } from './root-reducer';
 
-const middleWares = [logger]; // fires before anything hits the reducers
 
+
+const middleWares = [logger]; // fires before anything hits the reducers
 const composedEnhancers = compose(applyMiddleware(...middleWares));
 
-export const store = legacy_createStore(rootReducer, undefined, composedEnhancers);
+
+export const store = createStore(rootReducer, undefined, composedEnhancers);
