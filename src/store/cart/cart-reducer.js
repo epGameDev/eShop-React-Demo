@@ -4,7 +4,6 @@ const addCartItem = ({cartItems}, productToAdd) =>
     const isInCart = cartItems.find(productInCart => productInCart.id === productToAdd.id );
 
     if (isInCart) {
-
         // return a new array of products
         return cartItems.map(productInCart => {
             // if the current array already has product object with matching id, 
@@ -15,27 +14,24 @@ const addCartItem = ({cartItems}, productToAdd) =>
             : productInCart
         });
     }
-
     return [...cartItems, { ...productToAdd, quantity: 1 }]
 }
 
-const removeCartItem = ({cartItems}, productToRemove) => 
-{
-    return cartItems.filter(product => product.id !== productToRemove.id);
-}
 
 const updateCheckoutQuantity = ({cartItems}, productToUpdate, qty) => 
 {
     const productInCart = cartItems.find(product => product.id === productToUpdate.id);
-    if (qty < 1 && qty !== "")
-    {
-        qty = 0;
-        // return removeCartItem(cartItems, productToUpdate);
-    }
-
+    
+    if (qty < 1 && qty !== "")  qty = 0; // doesn't let input go in negative.
+    
     productInCart.quantity = qty;
     return [...cartItems];
 }
+
+
+const removeCartItem = ({cartItems}, productToRemove) => cartItems.filter(product => product.id !== productToRemove.id);
+
+
 
 export const CART_ACTION_TYPES = {
     SET_CART_ITEMS: "SET_CART_ITEMS",
@@ -47,30 +43,40 @@ export const CART_ACTION_TYPES = {
     DROP_DOWN_STATE: "IS_CART_OPEN"
 }
 
-export const cartReducer = (state, action) => {
+
+const INITIAL_STATE = {
+    isCartOpen: true,
+    cartItems: [],
+    cartCount: 0,
+    checkoutTotal: 0
+}
+
+
+export const cartReducer = (state = INITIAL_STATE, action) => {
     const { type, payload, qty } = action;
     let updatedCartItems = null;
-
+    
     switch (type) {
-
+        
         case CART_ACTION_TYPES.ADD_TO_CART:
             updatedCartItems = addCartItem(state, payload);
-                break;
+            break;
         case CART_ACTION_TYPES.UPDATE_CART:
             updatedCartItems = updateCheckoutQuantity(state, payload, qty);
-                break;
+            break;
         case CART_ACTION_TYPES.REMOVE_FROM_CART:
             updatedCartItems = removeCartItem(state, payload);
-                break;
+            break;
         case CART_ACTION_TYPES.DROP_DOWN_STATE:
             return {
                 ...state,
                 isCartOpen: payload,
-            }
+        }
         default:
-            throw new Error(`Unhandled action type in Product Reducer: ${action}`);
+            // throw new Error(`Unhandled action type in Product Reducer: ${action}`);
+            return state;
     }
-
+        
     const updatedCartTotal = Number(updatedCartItems.reduce((cartTotal, item) => cartTotal += (item.price * item.quantity), 0));
     const updatedCartCount = updatedCartItems.reduce((totalInCart, item) => totalInCart += item.quantity, 0);
 

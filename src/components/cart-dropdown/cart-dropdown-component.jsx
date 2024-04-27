@@ -1,10 +1,9 @@
-import { useContext } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import { CartContext } from "../../contexts/cart-context";
 
+import { setDropDownState, selectDropdownState, selectCartItems } from "../../store/cart/cart-actions.js";
 import Button from "../button/button-component";
 import { CartItem } from "../cart-item/cart-item-component";
-import { CART_ACTION_TYPES } from "../../reducers/cart-reducer.js";
 
 import {
   CartDropdownContainer,
@@ -13,18 +12,18 @@ import {
 } from "./cart-dropdown-styles.jsx";
 
 export const CartDropdown = () => {
-  const { isCartOpen, dispatch, cartItems } = useContext(CartContext);
+  const dispatch = useDispatch();
+  
+  const cartItems = useSelector(selectCartItems);
+  const dropDownState = useSelector(selectDropdownState);
 
-  const dropdownHandler = () => 
-  {
-    isCartOpen
-      ? dispatch({ type: CART_ACTION_TYPES.DROP_DOWN_STATE, payload: false })
-      : dispatch({ type: CART_ACTION_TYPES.DROP_DOWN_STATE, payload: true });
-  }
+// Removes Drop
+const dropdownHandler = () =>  dispatch(setDropDownState(!dropDownState));
+
 
   return (
     <div>
-      {!isCartOpen ? (
+      {!dropDownState ? (
         <CartDropdownContainer>
           <CartDropdownItems>
             {cartItems.length > 0 ? (

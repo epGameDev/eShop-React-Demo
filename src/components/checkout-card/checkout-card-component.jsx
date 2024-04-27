@@ -1,19 +1,17 @@
 import PropTypes from "prop-types";
-import { useContext } from "react";
-import { CartContext } from "../../contexts/cart-context";
+import { useDispatch } from "react-redux";
 
+import { setUpdateCart, setRemoveFromCart } from "../../store/cart/cart-actions.js";
 import { CheckoutProductCard } from "./checkout-card-styles.jsx";
-import { CART_ACTION_TYPES } from "../../reducers/cart-reducer.js";
 
 
 const CheckoutCard = ({product}) => {
+    const dispatch = useDispatch();
 
-
-    const { dispatch } = useContext(CartContext);
+    const updateProduct = (event) => dispatch(setUpdateCart(product, event));
+    const removeProduct = () => dispatch(setRemoveFromCart(product));
+    
     const {name, imageUrl, price, quantity } = product;
-
-    const removeProduct = () => dispatch({ type: CART_ACTION_TYPES.REMOVE_FROM_CART, payload: product});
-    const updateProduct = (event) => dispatch({ type: CART_ACTION_TYPES.UPDATE_CART, payload: product, qty: Number(event.target.value) });
 
     return  (
         <CheckoutProductCard>
