@@ -3,7 +3,7 @@ export const PRODUCT_ACTION_TYPES = {
 }
 
 const INITIAL_STATE = {
-    productCategoryMap: {},
+    categories: [],
 }
 
 
@@ -14,7 +14,7 @@ export const productReducer = (state = INITIAL_STATE, action = {}) => {
     switch (type) {
 
         case PRODUCT_ACTION_TYPES.SET_CURRENT_PRODUCTS:
-            return {...state, productCategoryMap: payload }
+            return {...state, categories: payload }
         default:
             return state;
 

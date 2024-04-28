@@ -2,13 +2,13 @@ import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 
-import { selectProducts } from "../../store/product/product-actions.js";
+import { selectProductCategories } from "../../store/product/product-actions.js";
 import { ProductCard } from "../../components/product-card/product-card-component";
 import { ProductContainer } from "./category-styles.jsx";
 
 const Category = () => {
     const { category } = useParams();
-    const products = useSelector(selectProducts);
+    const products = useSelector(selectProductCategories);
 
     return (
         <>
