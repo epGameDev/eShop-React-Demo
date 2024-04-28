@@ -1,46 +1,12 @@
-
-const addCartItem = ({cartItems}, productToAdd) => 
-{
-    const isInCart = cartItems.find(productInCart => productInCart.id === productToAdd.id );
-
-    if (isInCart) {
-        // return a new array of products
-        return cartItems.map(productInCart => {
-            // if the current array already has product object with matching id, 
-            return productInCart.id === productToAdd.id
-            // clone the original and update the qty property.
-            ? {...productInCart, quantity: productInCart.quantity + 1}
-            // otherwise just pass the same product object to the new array
-            : productInCart
-        });
-    }
-    return [...cartItems, { ...productToAdd, quantity: 1 }]
-}
-
-
-const updateCheckoutQuantity = ({cartItems}, productToUpdate, qty) => 
-{
-    const productInCart = cartItems.find(product => product.id === productToUpdate.id);
-    
-    if (qty < 1 && qty !== "")  qty = 0; // doesn't let input go in negative.
-    
-    productInCart.quantity = qty;
-    return [...cartItems];
-}
-
-
-const removeCartItem = ({cartItems}, productToRemove) => cartItems.filter(product => product.id !== productToRemove.id);
-
-
-
+import { addCartItem, updateCheckoutQuantity, removeCartItem } from "./cart-actions";
 export const CART_ACTION_TYPES = {
-    SET_CART_ITEMS: "SET_CART_ITEMS",
-    ADD_TO_CART: "ADD_CART_ITEM",
-    REMOVE_FROM_CART: "REMOVE_CART_ITEM",
-    UPDATE_CART: "UPDATE_CART_ITEM",
-    CART_COUNT: "CART_COUNT",
-    CHECKOUT_TOTAL: "CHECKOUT_TOTAL",
-    DROP_DOWN_STATE: "IS_CART_OPEN"
+    SET_CART_ITEMS: "cart/SET_CART_ITEMS",
+    ADD_TO_CART: "cart/ADD_CART_ITEM",
+    REMOVE_FROM_CART: "cart/REMOVE_CART_ITEM",
+    UPDATE_CART: "cart/UPDATE_CART_ITEM",
+    CART_COUNT: "cart/CART_COUNT",
+    CHECKOUT_TOTAL: "cart/CHECKOUT_TOTAL",
+    DROP_DOWN_STATE: "cart/IS_CART_OPEN"
 }
 
 
@@ -52,7 +18,7 @@ const INITIAL_STATE = {
 }
 
 
-export const cartReducer = (state = INITIAL_STATE, action) => {
+export const cartReducer = (state = INITIAL_STATE, action = {}) => {
     const { type, payload, qty } = action;
     let updatedCartItems = null;
     

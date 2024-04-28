@@ -9,7 +9,7 @@ import { ProductContainer } from "./category-styles.jsx";
 const Category = () => {
     const { category } = useParams();
     const products = useSelector(selectProductCategories);
-
+    console.log(products);
     return (
         <>
             <h2>{category.charAt(0).toUpperCase() + category.slice(1)}</h2>
