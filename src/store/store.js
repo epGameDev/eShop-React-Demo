@@ -2,10 +2,12 @@ import { compose, legacy_createStore as createStore , applyMiddleware, } from 'r
 import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import loggerMiddleware from './middleware/logger';
-import { thunk } from 'redux-thunk';
 // import { logger } from "redux-logger";
+import createSagaMiddleware from '@redux-saga/core';
+
 
 import { rootReducer } from './root-reducer';
+import { rootSaga } from './root-saga';
 
 
 
@@ -15,11 +17,13 @@ const persistConfig = {
     whitelist: ['cart']
 }
 
+const sagaMiddleware = createSagaMiddleware();
 
 const persistedReducer = persistReducer( persistConfig, rootReducer );
-const middleWares = [import.meta.env.DEV && loggerMiddleware, thunk].filter(Boolean); // fires before anything hits the reducers
+const middleWares = [import.meta.env.DEV && loggerMiddleware, sagaMiddleware].filter(Boolean); // fires before anything hits the reducers
 const composedEnhancers = compose(applyMiddleware(...middleWares));
 
 
 export const store = createStore(persistedReducer, undefined, composedEnhancers);
+sagaMiddleware.run(rootSaga)
 export const persistor = persistStore(store);

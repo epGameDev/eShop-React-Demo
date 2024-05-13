@@ -1,4 +1,3 @@
-import { Fragment } from "react";
 import { Outlet, Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
@@ -16,7 +15,7 @@ const NavBar = () => {
   const currentUser = useSelector(selectCurrentUser);
 
   return (
-    <Fragment>
+    <>
         <MainNavbar className="sticky-nav">
             <div className="nav__logo-container">
                 <LogoContainer to={"/"}>
@@ -38,7 +37,7 @@ const NavBar = () => {
             </NavbarMenuLinks>
         </MainNavbar>
         <Outlet/>
-      </Fragment>
+      </>
     )
   }
 

@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import {Routes, Route } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { fetchProductsAsync } from "./store/product/product-actions.js";
+import { fetchProductsStart } from "./store/product/product-actions.js";
 
 import { onAuthStateChangedListener, createUserDocumentFromAuth } from "./utils/firebase/firebase-utils";
 import { setCurrentUser } from "./store/user/user-action";
@@ -26,7 +26,7 @@ const App = () => {
 
   // Loads Products From Firebase
   useEffect(() => {
-    dispatch(fetchProductsAsync);
+    dispatch(fetchProductsStart());
   }, []);
 
 
