@@ -1,10 +1,10 @@
 import { useEffect } from "react";
 import {Routes, Route } from "react-router-dom";
+
 import { useDispatch } from "react-redux";
 import { fetchProductsStart } from "./store/product/product-actions.js";
+import { getCurrentUser } from "./store/user/user-action";
 
-import { onAuthStateChangedListener, createUserDocumentFromAuth } from "./utils/firebase/firebase-utils";
-import { setCurrentUser } from "./store/user/user-action";
 import NavBar from "./routes/navigation/navbar-component";
 import Home from "./routes/home/home-component";
 import Shop from "./routes/shop/shop-component";
@@ -16,18 +16,10 @@ const App = () => {
   const dispatch = useDispatch();
 
   // Loads User State
-  useEffect( () => {
-    const unsubscribe = onAuthStateChangedListener(async (user) => {
-        if (user) await createUserDocumentFromAuth(user);
-        dispatch(setCurrentUser(user));
-    });
-    return unsubscribe;
-  }, []);
+  useEffect(() => dispatch(getCurrentUser()), []);
 
   // Loads Products From Firebase
-  useEffect(() => {
-    dispatch(fetchProductsStart());
-  }, []);
+  useEffect(() => dispatch( fetchProductsStart() ) , []);
 
 
 // ? The '*' in shop is a placeholder for any;

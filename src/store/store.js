@@ -11,6 +11,7 @@ import { rootSaga } from './root-saga';
 
 
 
+
 const persistConfig = {
     key: 'root', //persist the whole thing
     storage,
@@ -25,5 +26,5 @@ const composedEnhancers = compose(applyMiddleware(...middleWares));
 
 
 export const store = createStore(persistedReducer, undefined, composedEnhancers);
-sagaMiddleware.run(rootSaga)
+sagaMiddleware.run(rootSaga);
 export const persistor = persistStore(store);

@@ -26,5 +26,5 @@ export function* onFetchProductCategories() {
 }
 
 export function* productCategoriesSaga() {
-yield all([call(onFetchProductCategories)]);
+    yield all([call(onFetchProductCategories)]);
 }

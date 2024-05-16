@@ -74,7 +74,7 @@ export const createUserDocumentFromAuth = async (userAuth, args = {}) => {
     }
   }
 
-  return userDocRef;
+  return userSnapShot;
 }
 
 
@@ -99,11 +99,10 @@ export const signInUser = async (email, password) => {
   
   try {
     const response = await signInWithEmailAndPassword(auth, email, password);
-    // const userName = await response.user.displayName;
-
     alert(`Hi, You are now signed in!`);
 
-    return response; 
+    return response;
+
   } 
   catch (error) {
 
@@ -130,7 +129,7 @@ export const signInUser = async (email, password) => {
 //========= SIGN OUT CURRENT USERS =========//
 export const signOutUser = async () => {
   const user = auth.currentUser;
-  if (!user) return alert("No user is signed in.");
+  // if (!user) return alert("No user is signed in.");
 
   try {
     const response = await signOut(auth)
@@ -147,7 +146,18 @@ export const signOutUser = async () => {
 
 //================================================//
 //========= Observing Auth State Changes =========//
-export const onAuthStateChangedListener = (callback) => onAuthStateChanged(auth, callback);
+export const getCurrentUserFromAuth = () => {
+
+  return new Promise((resolve, reject) => {
+    
+    const unsubscribe = onAuthStateChanged(auth, (userAuth) => {
+      unsubscribe(); // prevents memory leaks. Shuts down listener.
+      resolve(userAuth);
+
+    }, reject );
+
+  });
+}
 
 
 export const createCollectionsAndDocuments = async (collectionKey, objectsToAdd) => {

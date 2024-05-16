@@ -1,9 +1,8 @@
 import { Outlet, Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
 
-import { selectCurrentUser } from "../../store/user/user-action";
-import { signOutUser } from "../../utils/firebase/firebase-utils";
+import { selectCurrentUser, getUserSignOut } from "../../store/user/user-action";
 import { CartIcon } from "../../components/cart-icon/cart-icon-component";
 import { CartDropdown } from "../../components/cart-dropdown/cart-dropdown-component";
 import logo from "../../assets/crown.svg";
@@ -12,7 +11,12 @@ import { LogoContainer, MainNavbar, NavbarMenuLinks, NavbarLink } from "./navbar
 
 
 const NavBar = () => {
+  const dispatch = useDispatch();
   const currentUser = useSelector(selectCurrentUser);
+
+  const signOutCurrentUser = () => {
+    dispatch(getUserSignOut());
+  }
 
   return (
     <>
@@ -29,7 +33,7 @@ const NavBar = () => {
                 {/* <NavbarLink className="nav__menu-link"> <Link to={"/contact"}>CONTACT US</Link> </NavbarLink> */}
                 {
                   currentUser 
-                  ? (<NavbarLink onClick={signOutUser}>SIGN OUT</NavbarLink>) 
+                  ? (<NavbarLink onClick={signOutCurrentUser}>SIGN OUT</NavbarLink>) 
                   : (<NavbarLink> <Link to={"/account"}>SIGN IN</Link> </NavbarLink>)
                 }
                 <CartIcon/>
