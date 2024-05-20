@@ -78,5 +78,9 @@ export const SignUpFormContainer = styled.div`
         margin-top: 1rem;
         width: 100%;
     }
+    
+    & div:has(#button__sign-up) {
+        margin-right: 100% !important;
+      }
 
 `

@@ -127,7 +127,7 @@ const SignUpForm = () => {
           <label htmlFor="re-password">Confirm Password</label>
         </div>
 
-        <Button buttonType={"primary"} type={"submit"} text={"Sign Up"}/>
+        <Button id="button__sign-up" buttonType={"primary"} type={"submit"} text={"Sign Up"}/>
       </form>
     </SignUpFormContainer>
   );

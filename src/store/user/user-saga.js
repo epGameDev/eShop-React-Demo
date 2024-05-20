@@ -21,7 +21,6 @@ export function* fetchCurrentUser() {
     try {
         const currentUserAuth = yield call(getCurrentUserFromAuth);
         if (!currentUserAuth) return yield put(singInSuccess(currentUserAuth));
-        console.warn('mySaga started');
         
         yield call(getUserSnapshotFromAuth, currentUserAuth);
         yield put(singInSuccess(currentUserAuth));
@@ -92,6 +91,14 @@ export function* signOutCurrentUser() {
 
 export function* fetchSignOutCurrentUser() {
     yield takeLatest(USER_ACTION_TYPES.SIGN_OUT_USER, signOutCurrentUser)
+}
+
+
+
+//================================//
+//========= User Sign Up =========//
+export function* onEmailSignUp() {
+    yield takeLatest();
 }
 
 
