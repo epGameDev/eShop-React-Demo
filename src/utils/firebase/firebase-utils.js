@@ -77,7 +77,7 @@ export const createUserDocumentFromAuth = async (userAuth, args = {}) => {
   return userSnapShot;
 }
 
-
+ 
 
 //============================================================//
 //========= CREATING USER ACCOUNT VIA EMAIL/PASSWORD =========//

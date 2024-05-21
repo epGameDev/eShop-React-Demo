@@ -1,7 +1,14 @@
 import { call, put, takeLatest, all } from "redux-saga/effects";
 import { USER_ACTION_TYPES } from "./user-reducer";
-import { singInSuccess, signInFailed, singOutSuccess} from "./user-action";
-import { getCurrentUserFromAuth, createUserDocumentFromAuth, signInUser, googlePopUpSignIn, signOutUser } from "../../utils/firebase/firebase-utils";
+import { singInSuccess, signInFailed, singOutSuccess, signUpFailed} from "./user-action";
+import { 
+    getCurrentUserFromAuth, 
+    createUserDocumentFromAuth, 
+    signInUser, 
+    googlePopUpSignIn, 
+    signOutUser,
+    createAuthUser_EmailAndPassword
+} from "../../utils/firebase/firebase-utils";
 
 
 
@@ -97,11 +104,28 @@ export function* fetchSignOutCurrentUser() {
 
 //================================//
 //========= User Sign Up =========//
-export function* onEmailSignUp() {
-    yield takeLatest();
+export function* emailPasswordSignUp(action) {
+    const { email, password, displayName } = action.payload;
+    
+    try {
+        const { user } = yield call(createAuthUser_EmailAndPassword, email, password);
+        yield call(getUserSnapshotFromAuth, user, {displayName} );
+    } catch (error) {
+        put(signUpFailed(error));
+    }
+}
+
+export function* onEmailPasswordSignUp() {
+    yield takeLatest(USER_ACTION_TYPES.EMAIL_SIGN_UP_START, emailPasswordSignUp);
 }
 
 
 export function* userSagas() {
-    yield all([call(onFetchCurrentUser), call(onFetchUserEmailAndPassword), call(onFetchGoogleSignIn), call(fetchSignOutCurrentUser)]);
+  yield all([
+    call(onFetchCurrentUser),
+    call(onFetchUserEmailAndPassword),
+    call(onFetchGoogleSignIn),
+    call(fetchSignOutCurrentUser),
+    call(onEmailPasswordSignUp),
+  ]);
 }
