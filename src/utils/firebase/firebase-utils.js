@@ -74,7 +74,7 @@ export const createUserDocumentFromAuth = async (userAuth, args = {}) => {
     }
   }
 
-  return userSnapShot;
+  return userDocRef;
 }
 
  
@@ -146,18 +146,20 @@ export const signOutUser = async () => {
 
 //================================================//
 //========= Observing Auth State Changes =========//
-export const getCurrentUserFromAuth = () => {
+export const onAuthStateChangedListener = (callback) => onAuthStateChanged(auth, callback);
 
-  return new Promise((resolve, reject) => {
+// export const getCurrentUserFromAuth = () => {
+
+//   return new Promise((resolve, reject) => {
     
-    const unsubscribe = onAuthStateChanged(auth, (userAuth) => {
-      unsubscribe(); // prevents memory leaks. Shuts down listener.
-      resolve(userAuth);
+//     const unsubscribe = onAuthStateChanged(auth, (userAuth) => {
+//       unsubscribe(); // prevents memory leaks. Shuts down listener.
+//       resolve(userAuth);
 
-    }, reject );
+//     }, reject );
 
-  });
-}
+//   });
+// }
 
 
 export const createCollectionsAndDocuments = async (collectionKey, objectsToAdd) => {
