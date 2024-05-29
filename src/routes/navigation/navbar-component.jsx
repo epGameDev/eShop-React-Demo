@@ -1,5 +1,5 @@
 import { Outlet, Link } from "react-router-dom";
-// import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 
 
 // import { selectCurrentUser, getUserSignOut } from "../../store/user/user-action";
@@ -12,12 +12,10 @@ import { signOutUser } from "../../utils/firebase/firebase-utils";
 
 
 const NavBar = () => {
-  // const dispatch = useDispatch();
-  const currentUser = true;
-
+  const currentUser = useSelector( (state)  => state.user.currentUser);
+  
   const signOutCurrentUser = async () => {
     await signOutUser();
-    // dispatch(getUserSignOut());
   }
 
   return (
