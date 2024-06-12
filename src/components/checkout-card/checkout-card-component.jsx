@@ -1,14 +1,17 @@
 import PropTypes from "prop-types";
 import { useDispatch } from "react-redux";
 
-import { setUpdateCart, setRemoveFromCart } from "../../store/cart/cart-actions.js";
+import { setUpdateCart, setRemoveFromCart } from "../../store/cart/cart-reducer.js";
 import { CheckoutProductCard } from "./checkout-card-styles.jsx";
 
 
 const CheckoutCard = ({product}) => {
     const dispatch = useDispatch();
 
-    const updateProduct = (event) => dispatch(setUpdateCart(product, event));
+    const updateProduct = (event) => {
+        const qty = Number(event.target.value)
+        return dispatch(setUpdateCart(product, qty));
+    }
     const removeProduct = () => dispatch(setRemoveFromCart(product));
     
     const {name, imageUrl, price, quantity } = product;

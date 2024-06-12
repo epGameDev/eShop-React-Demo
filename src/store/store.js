@@ -1,20 +1,3 @@
-// import { compose, legacy_createStore as createStore , applyMiddleware, } from 'redux';
-// import { persistStore, persistReducer } from "redux-persist";
-// import storage from "redux-persist/lib/storage";
-// import loggerMiddleware from './middleware/logger';
-// // import { logger } from "redux-logger";
-
-// const persistConfig = {
-//     key: 'root', //persist the whole thing
-//     storage,
-//     whitelist: ['cart']
-// }
-
-// const persistedReducer = persistReducer( persistConfig, rootReducer );
-// const composedEnhancers = compose(applyMiddleware(...middleWares));
-
-// export const persistor = persistStore(store);
-
 import { configureStore } from "@reduxjs/toolkit";
 import { rootReducer } from './root-reducer';
 import loggerMiddleware from './middleware/logger';

@@ -2,9 +2,9 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 
 export const MainNavbar = styled.nav`
-  margin: 1.7rem 0;
+  margin: 1.7rem auto;
   padding: 0rem 1.7rem;
-  width: 100%;
+  width: 95%;
   height: 5rem;
   position: sticky;
   top: 0;
@@ -14,7 +14,7 @@ export const MainNavbar = styled.nav`
 
 
   &.sticky-nav {
-    padding: 1rem 1.17rem;
+    padding: 1rem 5.17rem;
     background-color: #ffffffcc;
     border-radius: 50px;
     backdrop-filter: blur(1.1px);

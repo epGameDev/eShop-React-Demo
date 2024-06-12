@@ -1,13 +1,7 @@
 import { createSelector } from "reselect";
-import { CART_ACTION_TYPES } from "./cart-reducer";
 
-// Sets the data
-export const setAddToCart = (product) => ({ type: CART_ACTION_TYPES.ADD_TO_CART, payload: product});
-export const setUpdateCart = (product, event) => ({ type: CART_ACTION_TYPES.UPDATE_CART, payload: product, qty: Number(event.target.value) });
-export const setRemoveFromCart = (product) => ({ type: CART_ACTION_TYPES.REMOVE_FROM_CART, payload: product});
-export const setDropDownState = (bool) => ({ type: CART_ACTION_TYPES.DROP_DOWN_STATE, payload: bool});
-
-// Provides the data
+// Provides the data  
+// TODO: [ ] Check to see what state.cart is.
 const selectCartReducer = (state) => state.cart;
 export const selectCartItems = createSelector([selectCartReducer], (cart) => cart.cartItems);
 export const selectCartCount = createSelector([selectCartReducer], (cart) => cart.cartCount);
@@ -15,18 +9,15 @@ export const selectCheckoutTotal = createSelector([selectCartReducer], (cart) =>
 export const selectDropdownState = createSelector([selectCartReducer], (cart) => cart.isCartOpen);
 
 // Actions to work with data
-export const addCartItem = ({cartItems}, productToAdd) => 
+export const addCartItem = (cartItems, productToAdd) => 
 {
     const isInCart = cartItems.find(productInCart => productInCart.id === productToAdd.id );
 
     if (isInCart) {
-        // return a new array of products
-        return cartItems.map(productInCart => {
-            // if the current array already has product object with matching id, 
+
+        return cartItems.map(productInCart => { 
             return productInCart.id === productToAdd.id
-            // clone the original and update the qty property.
             ? {...productInCart, quantity: productInCart.quantity + 1}
-            // otherwise just pass the same product object to the new array
             : productInCart
         });
     }

@@ -3,7 +3,8 @@ import { useSelector, useDispatch } from "react-redux";
 
 import { IconContainer } from "./cart-icon-styles.jsx";
 import ShoppingBag from "../../assets/shopping-bag.svg";
-import { selectCartCount, selectDropdownState, setDropDownState } from "../../store/cart/cart-actions.js";
+import { selectCartCount, selectDropdownState } from "../../store/cart/cart-actions.js";
+import { setDropDownState } from "../../store/cart/cart-reducer.js";
 
 
 

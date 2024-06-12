@@ -1,13 +1,6 @@
+import { createSlice } from "@reduxjs/toolkit";
+
 import { addCartItem, updateCheckoutQuantity, removeCartItem } from "./cart-actions";
-export const CART_ACTION_TYPES = {
-    SET_CART_ITEMS: "cart/SET_CART_ITEMS",
-    ADD_TO_CART: "cart/ADD_CART_ITEM",
-    REMOVE_FROM_CART: "cart/REMOVE_CART_ITEM",
-    UPDATE_CART: "cart/UPDATE_CART_ITEM",
-    CART_COUNT: "cart/CART_COUNT",
-    CHECKOUT_TOTAL: "cart/CHECKOUT_TOTAL",
-    DROP_DOWN_STATE: "cart/IS_CART_OPEN"
-}
 
 
 const INITIAL_STATE = {
@@ -17,40 +10,40 @@ const INITIAL_STATE = {
     checkoutTotal: 0
 }
 
+export const cartSlice = createSlice({
+    name: "cart",
+    initialState: INITIAL_STATE,
+    reducers: {
+        setAddToCart(state, action) {
+            let updatedCartItems = null;
+            updatedCartItems = addCartItem(state, action);
 
-export const cartReducer = (state = INITIAL_STATE, action = {}) => {
-    const { type, payload, qty } = action;
-    let updatedCartItems = null;
-    
-    switch (type) {
-        
-        case CART_ACTION_TYPES.ADD_TO_CART:
-            updatedCartItems = addCartItem(state, payload);
-            break;
-        case CART_ACTION_TYPES.UPDATE_CART:
-            updatedCartItems = updateCheckoutQuantity(state, payload, qty);
-            break;
-        case CART_ACTION_TYPES.REMOVE_FROM_CART:
-            updatedCartItems = removeCartItem(state, payload);
-            break;
-        case CART_ACTION_TYPES.DROP_DOWN_STATE:
-            return {
-                ...state,
-                isCartOpen: payload,
+            state.cartItems = updatedCartItems;
+            state.checkoutTotal = Number(updatedCartItems.reduce((cartTotal, item) => cartTotal += (item.price * item.quantity), 0));
+            state.cartCount = updatedCartItems.reduce((totalInCart, item) => totalInCart += item.quantity, 0);
+        },
+        setUpdateCart(state, action){
+            let updatedCartItems = null;
+            console.log("My Quantity______________ ", action.payload);
+            updatedCartItems = updateCheckoutQuantity(state, action.payload, action.payload.quantity);
+
+            state.cartItems = updatedCartItems;
+            state.checkoutTotal = Number(updatedCartItems.reduce((cartTotal, item) => cartTotal += (item.price * item.quantity), 0));
+            state.cartCount = updatedCartItems.reduce((totalInCart, item) => totalInCart += item.quantity, 0);
+        },
+        setRemoveFromCart(state, action) {
+            let updatedCartItems = null;
+            updatedCartItems = removeCartItem(state, action.payload);
+
+            state.cartItems = updatedCartItems;
+            state.checkoutTotal = Number(updatedCartItems.reduce((cartTotal, item) => cartTotal += (item.price * item.quantity), 0));
+            state.cartCount = updatedCartItems.reduce((totalInCart, item) => totalInCart += item.quantity, 0);
+        },
+        setDropDownState(state, action){
+            state.isCartOpen = action.payload;
         }
-        default:
-            // throw new Error(`Unhandled action type in Product Reducer: ${action}`);
-            return state;
     }
-        
-    const updatedCartTotal = Number(updatedCartItems.reduce((cartTotal, item) => cartTotal += (item.price * item.quantity), 0));
-    const updatedCartCount = updatedCartItems.reduce((totalInCart, item) => totalInCart += item.quantity, 0);
+});
 
-    return {
-        ...state,
-        cartItems: updatedCartItems,
-        cartCount: updatedCartCount,
-        checkoutTotal: updatedCartTotal
-    }
-}
-
+export const { setAddToCart, setUpdateCart, setRemoveFromCart, setDropDownState } = cartSlice.actions;
+export const cartReducer = cartSlice.reducer;

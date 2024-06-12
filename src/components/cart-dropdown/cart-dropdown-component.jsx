@@ -1,7 +1,8 @@
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 
-import { setDropDownState, selectDropdownState, selectCartItems } from "../../store/cart/cart-actions.js";
+import { selectDropdownState, selectCartItems } from "../../store/cart/cart-actions.js";
+import { setDropDownState } from "../../store/cart/cart-reducer.js";
 import Button from "../button/button-component";
 import { CartItem } from "../cart-item/cart-item-component";
 

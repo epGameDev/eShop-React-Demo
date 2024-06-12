@@ -1,8 +1,6 @@
 import { Outlet, Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
-
-// import { selectCurrentUser, getUserSignOut } from "../../store/user/user-action";
 import { CartIcon } from "../../components/cart-icon/cart-icon-component";
 import { CartDropdown } from "../../components/cart-dropdown/cart-dropdown-component";
 import logo from "../../assets/crown.svg";
