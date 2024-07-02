@@ -2,13 +2,13 @@ import PropTypes from "prop-types";
 import { useDispatch } from "react-redux";
 
 
-import { setAddToCart } from "../../store/cart/cart-reducer.js";
+import { addCartItem } from "../../store/cart/cart-reducer.js";
 import Button from "../button/button-component";
 import { ProductCardContainer } from "./product-card-styles.jsx";
 
 export const ProductCard = ({product}) => {
   const dispatch = useDispatch();
-  const addToCart = () => dispatch(setAddToCart(product));
+  const addToCart = () => dispatch(addCartItem(product));
   
   if (!product) return;
   const {imageUrl, name, price} = product;
