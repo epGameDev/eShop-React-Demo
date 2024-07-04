@@ -10,7 +10,6 @@ const Checkout = ()  => {
     const cartItems = useSelector(selectCartItems);
     const checkoutTotal = useSelector(selectCheckoutTotal);
 
-
     return (
         <CheckoutContainer className="main__container">
             <h1>Checkout</h1>
@@ -37,7 +36,7 @@ const Checkout = ()  => {
 
             <div className="checkout__cart-container">
                 { 
-                    cartItems.length <= 0 && cartItems[0]
+                    cartItems.length <= 0
                     ? <h3 className="checkout__empty-cart">Your cart is empty</h3>
                     : cartItems.map( product => <CheckoutCard key={product.id} product={product} /> ) 
                 }

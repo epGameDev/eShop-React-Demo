@@ -4,6 +4,7 @@ import {Routes, Route } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setProducts } from "./store/product/product-reducer.js";
 import { setCurrentUser } from "./store/user/user-reducer.js";
+import { createUserDocumentFromAuth, getCategoriesAndDocuments, onAuthStateChangedListener} from "./utils/firebase/firebase-utils.js";
 
 import NavBar from "./routes/navigation/navbar-component";
 import Home from "./routes/home/home-component";
@@ -11,7 +12,6 @@ import Shop from "./routes/shop/shop-component";
 import Contact from "./routes/contact-us/contact-component";
 import Account from "./routes/account/account-component";
 import Checkout from "./routes/checkout/checkout-component";
-import { createUserDocumentFromAuth, getCategoriesAndDocuments, onAuthStateChangedListener} from "./utils/firebase/firebase-utils.js";
 
 const App = () => {
   const dispatch = useDispatch();

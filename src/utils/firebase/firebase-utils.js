@@ -148,18 +148,6 @@ export const signOutUser = async () => {
 //========= Observing Auth State Changes =========//
 export const onAuthStateChangedListener = (callback) => onAuthStateChanged(auth, callback);
 
-// export const getCurrentUserFromAuth = () => {
-
-//   return new Promise((resolve, reject) => {
-    
-//     const unsubscribe = onAuthStateChanged(auth, (userAuth) => {
-//       unsubscribe(); // prevents memory leaks. Shuts down listener.
-//       resolve(userAuth);
-
-//     }, reject );
-
-//   });
-// }
 
 
 export const createCollectionsAndDocuments = async (collectionKey, objectsToAdd) => {

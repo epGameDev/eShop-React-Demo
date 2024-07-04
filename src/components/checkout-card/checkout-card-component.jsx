@@ -5,18 +5,16 @@ import { updateCheckoutQuantity, removeCartItem } from "../../store/cart/cart-re
 import { CheckoutProductCard } from "./checkout-card-styles.jsx";
 
 
-
 const CheckoutCard = ({product}) => {
     const dispatch = useDispatch();
 
+    const removeProduct = () => dispatch(removeCartItem(product));
     const updateProduct = (event) => {
         const qty = Number(event.target.value);
         return dispatch(updateCheckoutQuantity({product, qty}));
     }
-    const removeProduct = () => dispatch(removeCartItem(product));
     
     const {name, imageUrl, price } = product;
-
 
     return  (
         <CheckoutProductCard>
@@ -36,7 +34,6 @@ const CheckoutCard = ({product}) => {
                     <span className="checkout__product-delete" onClick={removeProduct}>✖️</span>
                 </div>
             </div>
-
         </CheckoutProductCard>
     )
 }

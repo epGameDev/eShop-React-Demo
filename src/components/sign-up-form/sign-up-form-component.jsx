@@ -1,8 +1,9 @@
 import { useState } from "react";
 
+import { signInUser } from "../../utils/firebase/firebase-utils.js";
+
 import Button from "../button/button-component";
 import { SignUpFormContainer } from "./sign-up-form-styles.jsx";
-import { signInUser } from "../../utils/firebase/firebase-utils.js";
 
 
 const defaultFormFields = {
@@ -45,7 +46,6 @@ const SignUpForm = () => {
         return alert("Email already in use");
       }
       console.log(`Error in creating user: ${error}`);
-
     }
 
   }

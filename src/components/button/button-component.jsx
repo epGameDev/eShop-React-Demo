@@ -11,13 +11,11 @@ const BTN_TYPE_CLASSES = {
 
 const Button = ({ text, buttonType, ...btnProps }) => {
 
-
     return (
         <ButtonContainer>
             <button className={BTN_TYPE_CLASSES[buttonType]} {...btnProps}> {text} </button>
         </ButtonContainer>
     )
-
 }
 
 export default Button;

@@ -7,9 +7,7 @@ const Spinner = () => {
 
     return (
         <SpinnerOverlay>
-            <SpinnerContainer>
-
-            </SpinnerContainer>
+            <SpinnerContainer />
         </SpinnerOverlay>
     )
 }

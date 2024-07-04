@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 
 import { selectDropdownState, selectCartItems } from "../../store/cart/cart-actions.js";
 import { setDropDownState } from "../../store/cart/cart-reducer.js";
+
 import Button from "../button/button-component";
 import { CartItem } from "../cart-item/cart-item-component";
 
@@ -17,30 +18,32 @@ export const CartDropdown = () => {
   const dispatch = useDispatch();
   
   const cartItems = useSelector(selectCartItems);
-  const dropDownState = useSelector(selectDropdownState);
+  const isCartOpen = useSelector(selectDropdownState);
 
-  const dropdownHandler = () =>  dispatch(setDropDownState(!dropDownState));
-
+  const dropdownHandler = () =>  dispatch(setDropDownState(!isCartOpen));
 
   return (
     <div>
-      {dropDownState ? (
-        <CartDropdownContainer>
+      {
+        isCartOpen 
+        ? (
+            <CartDropdownContainer>
+              <CartDropdownItems>
+                {
+                  cartItems.length > 0 
+                  ? ( cartItems.map((product) => ( <CartItem key={product.id} item={product} /> )) ) 
+                  : ( <EmptyMessage>Cart is empty...</EmptyMessage> )
+                }
+              </CartDropdownItems>
 
-          <CartDropdownItems>
-            {
-              cartItems.length > 0 
-              ? ( cartItems.map((product) => ( <CartItem key={product.id} item={product} /> )) ) 
-              : ( <EmptyMessage>Cart is empty...</EmptyMessage> )
-            }
-          </CartDropdownItems>
+              <Link to={"/checkout"}> 
+                <Button buttonType={"primary"} text={"Checkout"} onClick={dropdownHandler} />
+              </Link>
 
-          <Link to={"/checkout"}> 
-            <Button buttonType={"primary"} text={"Checkout"} onClick={dropdownHandler} />
-          </Link>
-
-        </CartDropdownContainer>
-      ) : null}
+            </CartDropdownContainer>
+          ) 
+        : null
+      }
     </div>
   );
 };
