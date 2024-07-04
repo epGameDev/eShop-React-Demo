@@ -2,7 +2,6 @@ import PropTypes from 'prop-types';
 import { LinkContainer, MainCategoryContainer, BackgroundImage, CategoryBody } from "./category-item-styles.jsx";
 
 const CategoryItem = ( {category} ) => {
-
     const { title, imageUrl } = category;
 
     return (

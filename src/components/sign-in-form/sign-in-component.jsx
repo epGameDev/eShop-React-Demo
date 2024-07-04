@@ -1,7 +1,6 @@
 import { useState } from "react";
 
-import { useDispatch } from "react-redux";
-import { emailSignInStart, googleSignInStart} from "../../store/user/user-action";
+import { googlePopUpSignIn, signInUser } from "../../utils/firebase/firebase-utils";
 
 import Button from "../button/button-component";
 import { FormSignInContainer, InputContainer} from "./sign-in-styles";
@@ -12,12 +11,11 @@ const defaultFormFields = {
 }
 
 const SignIn = () => {
-  const dispatch = useDispatch();
   
   //=================================//
   //========= Google Log In =========//
-  const signInWithGoogle = () => {
-    dispatch(googleSignInStart());
+  const signInWithGoogle = async () => {
+    await googlePopUpSignIn();
   }
 
   
@@ -41,8 +39,12 @@ const SignIn = () => {
   const handleSubmit = (event) => {
     event.preventDefault(); // prevents page from reloading.
 
-    dispatch(emailSignInStart(email, password));
-    resetFormFields();
+    try {
+      signInUser(email, password);
+      resetFormFields();
+    } catch (error) {
+      console.log('user sign in failed', error);
+    }
   }
     
   

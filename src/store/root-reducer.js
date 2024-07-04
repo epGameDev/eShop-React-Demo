@@ -1,7 +1,7 @@
-import { combineReducers } from "redux";
+import { combineReducers } from "@reduxjs/toolkit";
 
 
-import { userReducer } from "./user/user-reducer";
+import { userReducer } from "./user/user-reducer.js";
 import { cartReducer } from "./cart/cart-reducer";
 import { productReducer } from "./product/product-reducer";
 

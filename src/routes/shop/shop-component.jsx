@@ -1,7 +1,5 @@
 import { Routes, Route } from "react-router-dom";
 
-
-
 import Categories from "../categories/categories-component";
 import Category from "../category/category-component";
 

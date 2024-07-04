@@ -22,7 +22,7 @@ export const CategoryPreviewContainer = styled.div`
     .category__product-preview {
         width: 100%;
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(19rem, 1fr));
         gap: 2rem;
     }
 `

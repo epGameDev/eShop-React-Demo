@@ -2,8 +2,9 @@ import { useEffect } from "react";
 import {Routes, Route } from "react-router-dom";
 
 import { useDispatch } from "react-redux";
-import { fetchProductsStart } from "./store/product/product-actions.js";
-import { getCurrentUser } from "./store/user/user-action";
+import { setProducts } from "./store/product/product-reducer.js";
+import { setCurrentUser } from "./store/user/user-reducer.js";
+import { createUserDocumentFromAuth, getCategoriesAndDocuments, onAuthStateChangedListener} from "./utils/firebase/firebase-utils.js";
 
 import NavBar from "./routes/navigation/navbar-component";
 import Home from "./routes/home/home-component";
@@ -16,10 +17,32 @@ const App = () => {
   const dispatch = useDispatch();
 
   // Loads User State
-  useEffect(() => dispatch(getCurrentUser()), []);
+  useEffect(() => {
+    const unsubscribe = onAuthStateChangedListener( (user) => {
+      if(user) {
+        createUserDocumentFromAuth(user);
+      }
+      const userData = user && (({accessToken, email }) => ({ accessToken, email}))(user)
+      dispatch(setCurrentUser(userData)); 
+    });
+
+    return unsubscribe;
+    //!  prevents memory leaks if app is refreshed or unmounts.
+  }, []);
+
 
   // Loads Products From Firebase
-  useEffect(() => dispatch( fetchProductsStart() ) , []);
+  useEffect(() => {
+    try {
+      const getProductCatagories = async () => {
+        const categoryArray = await getCategoriesAndDocuments("categories");
+      dispatch(setProducts(categoryArray));
+      }
+      getProductCatagories();
+    } catch (error) {
+      console.error("product Error: ", error);
+    }
+  } , []);
 
 
 // ? The '*' in shop is a placeholder for any;
