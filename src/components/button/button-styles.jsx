@@ -1,9 +1,12 @@
 import styled from "styled-components";
 
+import { SpinnerContainer } from "../loading-spinner/loading-spinner-styles";
+
 export const ButtonContainer = styled.div`
     margin: 1rem auto;
     display: flex;
     justify-content: center;
+    align-items: center;
 
     & button{
         
@@ -74,4 +77,8 @@ export const ButtonContainer = styled.div`
         box-shadow: inset 0px -4px 7px 1px #c9c9c933;
     }
 
+`
+export const ButtonSpinner = styled(SpinnerContainer)`
+    width: 30px;
+    height: 30px;
 `

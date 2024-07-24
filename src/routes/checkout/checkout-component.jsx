@@ -2,6 +2,7 @@ import { useSelector } from "react-redux";
 
 import { selectCartItems, selectCheckoutTotal } from "../../store/cart/cart-actions.js";
 import CheckoutCard from "../../components/checkout-card/checkout-card-component";
+import PaymentForm from "../../components/payment-form/payment-form-component.jsx";
 
 import { CheckoutContainer } from "./checkout-styles.jsx";
 
@@ -48,6 +49,8 @@ const Checkout = ()  => {
                 <h4>Total: </h4>
                 <span>${checkoutTotal.toLocaleString("en-US")}.00</span>
             </div>
+
+            <PaymentForm />
 
         </CheckoutContainer>
     )

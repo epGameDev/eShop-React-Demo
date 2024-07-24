@@ -1,19 +1,23 @@
 import PropTypes from "prop-types";
 
-import { ButtonContainer } from "./button-styles.jsx";
+import { ButtonContainer, ButtonSpinner } from "./button-styles.jsx";
 
-const BTN_TYPE_CLASSES = {
+export const BTN_TYPE_CLASSES = {
     google: "btn__google",
     primary: "btn__primary",
     secondary: "btn__secondary",
     clear: "btn__clear"
 }
 
-const Button = ({ text, buttonType, ...btnProps }) => {
+const Button = ({ text, buttonType, isLoading, ...btnProps }) => {
 
     return (
         <ButtonContainer>
-            <button className={BTN_TYPE_CLASSES[buttonType]} {...btnProps}> {text} </button>
+            {
+                isLoading
+                ? <ButtonSpinner/>
+                : <button className={BTN_TYPE_CLASSES[buttonType]} {...btnProps} disabled={isLoading}> {text} </button>
+            }
         </ButtonContainer>
     )
 }
@@ -24,5 +28,6 @@ Button.propTypes = {
     text: PropTypes.string,
     buttonType: PropTypes.string,
     btnProps: PropTypes.object,
+    isLoading: PropTypes.bool
 
 }
