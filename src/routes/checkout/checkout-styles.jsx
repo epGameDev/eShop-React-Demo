@@ -34,10 +34,15 @@ export const CheckoutContainer = styled.main`
             justify-content: space-between;
         }
 
-        .checkout__totals{
+        .checkout__totals {
             display: flex;
             gap: 3rem;
         }
+
+        @media (max-width: 420px){
+            padding-left: 0;
+        }
+    }
 
     }
     .checkout__hr{
@@ -68,8 +73,14 @@ export const CheckoutContainer = styled.main`
     .checkout__cart-headers{
         flex-wrap: wrap;
 
-        .checkout__title{
+        .checkout__title, .checkout__name{
             display: none;
         }
+
+        .checkout__totals {
+         margin-left: 24vw;
+        }
     }
-`
+
+
+`;

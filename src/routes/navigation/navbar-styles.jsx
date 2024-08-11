@@ -2,9 +2,8 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 
 export const MainNavbar = styled.nav`
-  margin: 1.7rem auto;
+  margin: 1.7rem 2rem;
   padding: 0rem 1.7rem;
-  width: 95%;
   height: 5rem;
   position: sticky;
   top: 0;
@@ -19,7 +18,13 @@ export const MainNavbar = styled.nav`
     border-radius: 50px;
     backdrop-filter: blur(1.1px);
     color: #000;
+
+    @media (max-width: 720px) {
+      padding: 1rem 2rem;
+    }
   }
+
+
 `
 
 export const LogoContainer = styled(Link)`
@@ -28,17 +33,22 @@ export const LogoContainer = styled(Link)`
 
   img {
     width: 110%;
+    min-width: 55px;
     height: 100%;
   }
 `
 export const NavbarMenuLinks = styled.ul`
-  margin: 0;
-  width: 50%;
+  margin: 0 0 0 auto;
+  padding: 0;
   height: 100%;
   display: flex;
   align-items: flex-end;
   justify-content: flex-end;
   list-style: none;
+
+  @media (max-width: 720px) {
+    display: none;
+  }
 `
 
 export const NavbarLink = styled.li`
@@ -49,7 +59,7 @@ export const NavbarLink = styled.li`
   cursor: pointer;
   transition: all 5ms ease-in;
   &:hover {
-    font-weight: 600;
+    color: 000;
     text-decoration: underline;
     text-underline-offset: 4px;
   }

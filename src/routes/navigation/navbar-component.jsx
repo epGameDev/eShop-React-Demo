@@ -34,10 +34,12 @@ const NavBar = () => {
                   ? (<NavbarLink onClick={signOutCurrentUser}>SIGN OUT</NavbarLink>) 
                   : (<NavbarLink> <Link to={"/account"}>SIGN IN</Link> </NavbarLink>)
                 }
-                <CartIcon/>
-                <CartDropdown />
             </NavbarMenuLinks>
+
+            <CartIcon/>
+            <CartDropdown />
         </MainNavbar>
+
         <Outlet/>
       </>
     )

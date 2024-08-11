@@ -7,5 +7,6 @@ export const Line = styled.hr`
 
 export const AccountLinkContainer = styled.div`
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-evenly;
 `

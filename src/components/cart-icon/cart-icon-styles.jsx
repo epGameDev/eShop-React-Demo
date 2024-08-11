@@ -22,5 +22,9 @@ export const IconContainer = styled.div`
     bottom: 0.5rem;
     pointer-events: none;
   }
+
+  @media (max-width: 720px){
+    margin-left: auto;
+  }
 `
 

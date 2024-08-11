@@ -28,6 +28,7 @@ export const CheckoutProductCard = styled.div`
         display: flex;
         justify-content: space-between;
         align-items: center;
+        padding: 0 1rem;
 
         .checkout__product-totals{
             display: flex;
@@ -56,13 +57,19 @@ export const CheckoutProductCard = styled.div`
         cursor: pointer;
     }
     
-    &:media (max-width: 550px) {
+    @media (max-width: 550px) {
+
         .checkout__product-card{
             flex-wrap: wrap;
     
             .checkout__img-container{
                 max-width: 6rem;
                 max-height: 6rem;
+                
+                img {
+                    width: 100%;
+                    min-width: 6rem;
+                }
             }
         }
     

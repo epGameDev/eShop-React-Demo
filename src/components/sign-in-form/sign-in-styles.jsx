@@ -77,7 +77,7 @@ export const FormSignInContainer = styled.div`
 
 export const InputContainer = styled.div`
     margin-bottom: 1.25rem;
-    max-width: 25rem;
+    max-width: 30rem;
     width: 100%;
     display: flex;
     flex-direction: column;
