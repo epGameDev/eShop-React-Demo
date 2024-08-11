@@ -36,6 +36,10 @@ export const LogoContainer = styled(Link)`
     min-width: 55px;
     height: 100%;
   }
+
+    @media (max-width: 720px) {
+      display: none;
+    }
 `
 export const NavbarMenuLinks = styled.ul`
   margin: 0 0 0 auto;
@@ -46,9 +50,7 @@ export const NavbarMenuLinks = styled.ul`
   justify-content: flex-end;
   list-style: none;
 
-  @media (max-width: 720px) {
-    display: none;
-  }
+
 `
 
 export const NavbarLink = styled.li`
